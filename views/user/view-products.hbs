@@ -224,11 +224,11 @@ scroll-behavior: smooth ;
     <div class="scrolling-wrapper m-4" id="scroll1">
       {{#each product}}
       {{#product_check this 'Smartphones'}}
-      <div class="col-6 col-md-2 product">
-        <div class="card-outer m-1" style="border: none; ">
-          <div class="card border border-shadow card-outer">
+       <div class="col-6 col-md-2 product" style="">
+        <div class="card-outer m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
+          <div class="card border border-shadow card-outer" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:13em" alt="">
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
               <p class="card-text">Rs.{{this.productData.price}}/-</p>
@@ -298,11 +298,11 @@ scroll-behavior: smooth ;
     <div class="scrolling-wrapper">
       {{#each product}}
       {{#product_check this 'Electronics'}}
-     <div class="col-6 col-md-2 product">
-        <div class="card-outer m-1" style="border: none; ">
-          <div class="card border border-shadow card-outer">
+      <div class="col-6 col-md-2 product" style="">
+        <div class="card-outer m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
+          <div class="card border border-shadow card-outer" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:13em" alt="">
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
               <p class="card-text">Rs.{{this.productData.price}}/-</p>
@@ -330,11 +330,11 @@ scroll-behavior: smooth ;
     <div class="scrolling-wrapper">
       {{#each product}}
       
-      <div class="col-6 col-md-2 product">
-        <div class="card-outer m-1" style="border: none; ">
-          <div class="card border border-shadow card-outer">
+       <div class="col-6 col-md-2 product" style="">
+        <div class="card-outer m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
+          <div class="card border border-shadow card-outer" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:13em" alt="">
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
               <p class="card-text">Rs.{{this.productData.price}}/-</p>

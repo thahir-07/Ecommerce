@@ -411,7 +411,7 @@ router.post('/search', async (req, res) => {
 
 
 router.get('/mobiles-tablets', async (req, res) => {
-  var product = await userHelpers.filter_products('smart phone', 'tablet')
+  var product = await userHelpers.filter_products('Smartphones', 'Tablet')
   res.render('user/mobiles-tablets', { product, admin: false, user, cartItemCount })
 })
 router.get('/electronics', async (req, res) => {

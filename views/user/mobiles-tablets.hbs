@@ -4,22 +4,26 @@
         <h2 class="cl">Smart Phones and Tablets</h2>
         
         {{#each product}}
-        <div class="col-6 col-md-4 col-lg-2 mt-3 text-center fixed " >
-          <a class="load" href="/detailed-view/{{this._id}}">
-          <div class="card  border-shadow "style="">
-            <img src="/product-image/{{this._id}}.jpg" class="card-img-top" style="height:13em" alt="">
-            <p class="card-text">{{this.name}}</p>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/{{this.productData._id}}" >
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.price}}/-</p></div>
-              <div class="pt-0 desc"><p class="card-text mt-0">{{this.description}}</p></div> 
-
-              
-              <div class="mb-2"><button class="btn button" onclick="addToCart('{{this._id}}',{{user}})"  style="color: rgb(255, 255, 255);" cl>add to cart</button></div>
-              
-               
-          </div>
+              <p class="card-text">Rs.{{this.productData.price}}/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">{{this.productData.description}}</p>
+            </div>
         </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('{{this.productData._id}}',{{user}})"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
         </div>
+      </div>
         {{/each}}
 
       </div>

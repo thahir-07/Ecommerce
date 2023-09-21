@@ -324,7 +324,53 @@ module.exports = {
     },
     filter_products:(category1,category2)=>{
         return new Promise(async (resolve, reject)=> {
-           var product= await db.get().collection(collections.PRODUCT_COLLECTION).find({$or:[{category:category1},{category:category2}]}).toArray()
+           var product= await db.get().collection(collections.PRODUCT_COLLECTION).aggregate([
+           {
+                $match:{
+                    $or:[
+                        {subCategory:category1},
+                        {subCategory:category2}]
+                }
+           }, {
+              $lookup: {
+                from: "rating",
+                localField: "_id",
+                foreignField: "proId",
+                as: "ratings"
+              }
+            },
+            {
+              $unwind: {
+                path: "$ratings",
+                preserveNullAndEmptyArrays: true
+              }
+            },
+            {
+              $group: {
+                _id: "$_id",
+                name: { $first: "$name" },
+                totalRating: { $sum: "$ratings.rating" },
+                averageRating: {
+                  $avg: "$ratings.rating"
+                },
+                productData: { $first: "$$ROOT" }
+              }
+            },
+            {
+              $project: {
+                _id: 0,
+                name: 1,
+                totalRating: 1,
+                averageRating: {
+                  $divide: [
+                    { $trunc: { $multiply: ["$averageRating", 10] } },
+                    10
+                  ]
+                },
+                productData: 1
+              }
+            }
+          ]).toArray();
            resolve(product)
         })
     },

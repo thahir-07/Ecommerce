@@ -56,6 +56,21 @@
         top:90px;
         right: 20px;
     }
+    .size{
+       display: flex;
+       flex-direction: row;
+       padding: 10px;
+       justify-content: center;
+       cursor: pointer;
+
+    }
+    .size-border{
+        border: 2px solid rgba(208, 178, 12, 0.84) !important;
+        border-radius: 5px;
+    }.size-div{
+        display: flex;
+        flex-direction: row;
+    }
 </style>
 <div class="container">
     <div class="row ">
@@ -96,7 +111,7 @@
             <img id="main-img" src="/product-image/{{id}}.jpg" alt="">
              <div class="row text-center mt-3">
                     <button class="btn button" onclick="addToCart('{{id}}',{{user.id}})"
-                style="color: rgb(255, 255, 255); width:90px;margin-left:25%;">add to cart</button></div>
+                style="color: rgb(255, 255, 255); width:90px;margin-left:25%;">Add to cart</button></div>
                 
             <!--<div class="row text-center mt-3" style="border: 1px solid;">
                    add to cart</div>-->
@@ -112,13 +127,18 @@
                 <div class="bg-color" style="color: rgb(255, 255, 255);font-size: larger; width: 60px;border-radius: 5px;margin-left: auto;margin-right: auto;" >{{#if proRating}}{{#total_rating proRating}}{{this}}{{/total_rating}}{{else}}5.0{{/if}}  &#9733;</div>
                 </div>
             </div>
-           <!-- <div class="row m-1" >
-                <div class="col-12"  style="border: 1px solid; padding: 10px;margin: 2px; border-radius: 5px;">
+             {{#if product.size}}
+           <div class="row m-1" >
+                <div class="col-12  "  style="border: 1px solid; padding: 10px;margin: 2px; border-radius: 5px;">
                 <h5>Select Size</h5>
-                
-               <div class="bg-color" style="color: rgb(255, 255, 255);font-size:20px;width:90px;padding:3px; border-radius: 5px;">Free Size</div>
+                <div class="size-div">
+                {{#each product.size}}
+               <div class="size" style=" border-radius: 1px;border: 1px solid grey;margin:10px;width:50px;">{{this}}</div>
+               {{/each}}
                 </div>
-            </div>-->
+                </div>
+            </div>
+            {{/if}}
             <div class="row m-1">
                 <div class="col-12 " style="border: 1px solid; padding: 10px;margin: 2px; border-radius: 5px;">
                     <h4>Description</h4>
@@ -131,6 +151,7 @@
                     <div id="features" class="desc"></div>
                     <button onclick="change()" style="color: blue;">show more</button>
                 </div>
+                {{#if proRating}}
                 <div class="row" style="border: 1px solid grey; padding: 10px;margin: 2px; border-radius: 5px;">
                     <div class="col-8">
                     <h4 style="display: inline;">Rating & Reviews</h4> </div>
@@ -141,7 +162,7 @@
                         <div class="row">
                         <div class="col-2"><img style="width:30px; height: 30px;border-radius: 15px;display: inline;" src="/user-image/{{this.userId}}.jpg" ></div>
                         <p class="col-6" >{{this.user_name}}</p>
-                        <div class="col-4 mb-3 "> <div class="bg-color" style="color: rgb(255, 255, 255);font-size: larger;width:fit-content;border-radius: 5px;" ><span class="m-2">{{this.rating}}.0 &#9733; </span></div></div>
+                        <div class="col-4 mb-3 "> <div class="bg-color" style="color: rgb(255, 255, 255);font-size: 15px;width:fit-content;border-radius: 5px;padding: 0;" ><span class="m-2">{{this.rating}}.0 &#9733; </span></div></div>
                         </div>
                         <div >{{this.review}}</div>
                         <div class="mt-2 scrolling-wrapper" id="wrapper">
@@ -156,6 +177,7 @@
                     </div>
                     
                 </div>
+                {{/if}}
     </div>
             
         </div>
@@ -169,22 +191,26 @@
         <h4 style="color: rgb(59, 58, 58);">Similar Products</h4>
         
         {{#each same}}
-        <div class="col-6 col-md-4 col-lg-2 mt-3 text-center fixed " >
-        <a class="load" href="/detailed-view/{{this._id}}">
-          <div class="card  border-shadow "style="">
-            <img src="/product-image/{{this._id}}.jpg" class="card-img-top" style="height:13em" alt="">
-            <p class="card-text">{{this.name}}</p>
+        <div class="col-6 col-md-2 product" style="">
+        <div class="card-outer mb-2" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;margin: 0;">
+          <div class="card border border-shadow card-outer" >
+        <a class="load" href="/detailed-view/{{this.productData._id}}" >
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
+            <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.price}}/-</p></div>
-              <div class="pt-0" style="height: 50px; overflow: hidden;"><p class="card-text mt-0" >{{this.description}}</p></div> 
-
-               </a>
-              <div class="mb-2"><button class="btn button" onclick="addToCart('{{this._id}}',{{user}})"  style="color: rgb(255, 255, 255);" cl>add to cart</button></div>
-              
-               
+              <p class="card-text">Rs.{{this.productData.price}}/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">{{this.productData.description}}</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('{{this.productData._id}}',{{user}})"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
           </div>
-       
         </div>
+      </div>
         {{/each}}
 
       </div>
@@ -233,7 +259,6 @@ function change(){
 }
 var show=(id)=>{
   var review_image=document.getElementById(id).src
-  console.log("srcc...."+review_image)
   document.getElementById('view').src=review_image
   var c=document.getElementById('i_c')
   c.classList.replace('image-container','image-container2')
@@ -243,5 +268,16 @@ var show=(id)=>{
 function close_window(){
     var c=document.getElementById('i_c')
   c.classList.replace('image-container2','image-container')
+}
+
+   var size=document.getElementsByClassName('size')
+   for (let s of size ) {
+    s.addEventListener('click',()=>{
+       for(let i of size){
+        i.classList.remove('size-border')
+       }
+       s.classList.add('size-border')
+    })
+
 }
 </script>

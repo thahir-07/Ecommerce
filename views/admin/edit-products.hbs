@@ -55,9 +55,75 @@
                 <label for="price" class="form-label">Description</label>
                 <textarea type="text" class="form-control" id="description" name="description" aria-valuemax="30"  >{{data.description}}</textarea>
             </div>
+
              <div class="mb-3">
                 <label for="price" class="form-label">Features</label>
                 <textarea type="text" class="form-control" id="feature" name="features" aria-valuemax="30"  >{{data.features}}</textarea>
+            </div>
+            <div class="mb-3">
+        <label for="size" class="form-label" id="form-label" hidden>Available sizes:</label>
+        <select id="size-update" name="size" hidden multiple style="width: 100%;" >
+    <!-- Men's Clothing Sizes -->
+    <optgroup label="Men's Clothing Sizes">
+        <option value="XS">Men's XS (Extra Small)</option>
+        <option value="S">Men's S (Small)</option>
+        <option value="M">Men's M (Medium)</option>
+        <option value="L">Men's L (Large)</option>
+        <option value="XL">Men's XL (Extra Large)</option>
+        <!-- Add more options as needed -->
+    </optgroup>
+
+    <!-- Women's Clothing Sizes -->
+    <optgroup label="Women's Clothing Sizes">
+        <option value="XS">Women's XS (Extra Small)</option>
+        <option value="S">Women's S (Small)</option>
+        <option value="M">Women's M (Medium)</option>
+        <option value="L">Women's L (Large)</option>
+        <option value="XL">Women's XL (Extra Large)</option>
+        <!-- Add more options as needed -->
+    </optgroup>
+
+    <!-- Men's Footwear Sizes -->
+    <optgroup label="Men's Footwear Sizes">
+        <option value="6">Men's 6</option>
+        <option value="7">Men's 7</option>
+        <option value="8">Men's 8</option>
+        <option value="9">Men's 9</option>
+        <option value="10">Men's 10</option>
+        <!-- Add more options as needed -->
+    </optgroup>
+
+    <!-- Women's Footwear Sizes -->
+    <optgroup label="Women's Footwear Sizes">
+        <option value="6">Women's 6</option>
+        <option value="7">Women's 7</option>
+        <option value="8">Women's 8</option>
+        <option value="9">Women's 9</option>
+        <option value="10">Women's 10</option>
+        <!-- Add more options as needed -->
+    </optgroup>
+    
+    <!-- Children's Clothing Sizes -->
+    <optgroup label="Children's Clothing Sizes">
+        <option value="infant-0-3m">Infant 0-3 months</option>
+        <option value="infant-3-6m">Infant 3-6 months</option>
+        <option value="toddler-2t">Toddler 2T</option>
+        <option value="toddler-3t">Toddler 3T</option>
+        <option value="kids-4">Kids 4</option>
+        <!-- Add more options as needed -->
+    </optgroup>
+    
+    <!-- Children's Footwear Sizes -->
+    <optgroup label="Children's Footwear Sizes">
+        <option value="infant-0">Infant 0</option>
+        <option value="infant-1">Infant 1</option>
+        <option value="toddler-4">Toddler 4</option>
+        <option value="toddler-5">Toddler 5</option>
+        <option value="kids-6">Kids 6</option>
+        <!-- Add more options as needed -->
+    </optgroup>
+     <option value="Free size">Free size</option>
+</select>
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">image1</label >
@@ -99,15 +165,15 @@
             "Wearable Devices"
         ],
         "Fashion": [
-            "Men's Clothing",
-            "Women's Clothing",
-            "Children's Clothing",
-            "Men's Footwear",
-            "Women's Footwear",
-            "Children's Footwear",
+            "Men Clothing",
+            "Women Clothing",
+            "Children Clothing",
+            "Men Footwear",
+            "Women Footwear",
+            "Children Footwear",
             "Jewelry",
-            "Men's Watches",
-            "Women's Watches",
+            "Men Watches",
+            "Women Watches",
             "Hats",
             "Bags and Luggage"
         ],
@@ -212,6 +278,7 @@
     }
     var productCategory='{{data.productCategory}}'
     var subCategory='{{data.subCategory}}'
+    console.log(subCategory)    
 
     function viewImage(event,i){
         document.getElementById('imgView'+i).src=URL.createObjectURL(event.target.files[0])
@@ -224,13 +291,11 @@
         if(productCategory!=""){
             change()
         }
-        
-        for(sub of sub_category){
-            if(sub.value==subCategory){
-                sub.selected=true
+            for(var i of sub_category){
+                if (i.value == subCategory){
+                    i.selected=true
+                }
             }
-        }
-
        }
     }
 
@@ -252,6 +317,14 @@ product_category.addEventListener('change',change)
         option.textContent = sub_cat;
       sub_category.appendChild(option)
     })
+    if(main_category=='Fashion'){
+        console.log('main category is   ',main_category)
+        document.getElementById('size-update').hidden=false
+        document.getElementById('form-label').hidden=false
+         $(document).ready(function() {
+            $('#size-update').select2();
+        });
+    }
 }
 
 

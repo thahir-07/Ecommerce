@@ -92,7 +92,8 @@ module.exports={
                 subCategory:data.subCategory,
                 price:data.price,
                 description:data.description,
-                features:data.features
+                features:data.features,
+                size:data.size
             }
                 }).then((response)=>{
                 resolve(response)
@@ -343,7 +344,52 @@ getCartProductsList:(userId)=>{
 },
 getSimilarProduct: (subCategory)=>{
     return new Promise(async(resolve,reject)=>{
-        let product= await db.get().collection(collections.PRODUCT_COLLECTION).find({subCategory:subCategory}).toArray() 
+        let product= await db.get().collection(collections.PRODUCT_COLLECTION).aggregate([
+            {
+
+                $match:{
+                    subCategory:subCategory
+                }
+            },{
+              $lookup: {
+                from: "rating",
+                localField: "_id",
+                foreignField: "proId",
+                as: "ratings"
+              }
+            },
+            {
+              $unwind: {
+                path: "$ratings",
+                preserveNullAndEmptyArrays: true
+              }
+            },
+            {
+              $group: {
+                _id: "$_id",
+                name: { $first: "$name" },
+                totalRating: { $sum: "$ratings.rating" },
+                averageRating: {
+                  $avg: "$ratings.rating"
+                },
+                productData: { $first: "$$ROOT" }
+              }
+            },
+            {
+              $project: {
+                _id: 0,
+                name: 1,
+                totalRating: 1,
+                averageRating: {
+                  $divide: [
+                    { $trunc: { $multiply: ["$averageRating", 10] } },
+                    10
+                  ]
+                },
+                productData: 1
+              }
+            }
+          ]).toArray(); 
         resolve(product)
 
     })

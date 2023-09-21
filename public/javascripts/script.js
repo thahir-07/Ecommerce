@@ -9,7 +9,6 @@ $('#productTable').DataTable()
 })
 $(function(){
     $('#user').DataTable()
-    
     })
 function count(id){
     console.log("count function called")
