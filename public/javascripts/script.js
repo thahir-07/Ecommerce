@@ -3,13 +3,8 @@ window.addEventListener('pageshow',(event)=>{
         location.reload()
     }
 })
-$(function(){
-$('#productTable').DataTable()
 
-})
-$(function(){
-    $('#user').DataTable()
-    })
+
 function count(id){
     console.log("count function called")
    var count=document.getElementById(id).innerHTML
@@ -184,9 +179,10 @@ function addToWhishlist(proId){
             url:'/add_to_whishlist/'+proId,
             method:'get',
             success:(response)=>{
-                if(response){
-                   for(i in whishlist)
-                    whishlist[i].innerHTML='❤️'
+                if(response.value){
+                    for(var i=0;i<whishlist.length ;++i ){
+                        whishlist[i].textContent='❤️'
+                    }
                 }else{
                     location.href='/login'
                 }
@@ -194,17 +190,30 @@ function addToWhishlist(proId){
         })
     }else{
         $.ajax({
-            url:'remove_from_whishlist/'+proId,
+            url:'/remove_from_whishlist/'+proId,
             method:'get',
             success:(response)=>{
-                if(response){
-                    for(i in whishlist)
-                    whishlist[i].innerHTML='🤍'
+                if(response.value){
+                    for(var i=0;i<whishlist.length ;++i ){
+                        whishlist[i].textContent='🤍'
+                    }
+    
                 }else{
                     location.href='/login'
                 }
             }
         })
     }
+
    
+}
+function removeFromWhishlist(proId){
+    $.ajax({
+        url:'/remove_from_whishlist/'+proId,
+        method:'get',
+        success:(response)=>{
+            location.reload()
+        }
+    })
+
 }

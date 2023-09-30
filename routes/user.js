@@ -505,13 +505,12 @@ router.get('/cookie-policy', (req, res) => {
 })
 router.get('/add_to_whishlist/:id', (req, res) => {
   var id = req.params.id
-  console.log("hello")
-  if (req.session.userLoggedIn) {
-    userHelpers.addToWishList(id, user._id).then((response) => {
-      res.json(true)
+  if (req.session.userLoggedIn){
+    userHelpers.addToWishList(id,user._id).then((response) => {
+      res.json({value:response})
     })
   } else {
-    res.json(false)
+    res.json({value:false})
   }
 
 
@@ -531,11 +530,11 @@ router.get('/remove_from_whishlist/:proId',(req,res)=>{
   var proId=req.params.proId
   if(req.session.userLoggedIn){
   userHelpers.delete_from_whishlist(user._id,proId).then((response)=>{
-    res.json(true)
+    res.json({value:true})
   })
 
   }else{
-    res.json(false)
+    res.json({value:false})
   }
 })
 module.exports = router

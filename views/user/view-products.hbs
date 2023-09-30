@@ -99,7 +99,7 @@
 </section>
 <section style="padding-top: 0;">
   <div class="container-fluid text-center" >
-     <img src="/project-images/ad1.jpg" id="ad-img" width="100%" height="300" alt="">
+     <img src="/project-images/ad1.jpg" id="ad-img" width="100%" height="300" alt="Image not found">
     
       <input type="radio" name="slide" class="slide" id="img1">
       <input type="radio" name="slide" class="slide" id="img2">
@@ -235,7 +235,7 @@
         </a>
             <div class="mb-1 ">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}',{{user}})"
+             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}','{{user}}')"
                 style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
@@ -299,11 +299,11 @@ const closeAlertButton = document.getElementById("close-alert");
 closeAlertButton.addEventListener("click", () => {
   customAlert.style.display = "none";
 });
-</script>
-<script>
+
+//ad section
   var i=0
   document.getElementById('img1').checked=true
-  var images=['/project-images/ad2.jpg','/project-images/ad3.jpg',]
+  var images=['/project-images/ad2.jpg','/project-images/ad3.jpg']
   var cur=document.getElementById('ad-img').src
   images.push(cur)
   setInterval(()=>{
@@ -330,8 +330,10 @@ closeAlertButton.addEventListener("click", () => {
     document.getElementById('ad-img').src=images[1]
 
   })
+
 </script>
-<script>
+
+<!--<script>
   function scroll_right(){
   var scroll=document.getElementById('scroll1')
   scroll.scrollLeft+=200
@@ -350,7 +352,7 @@ closeAlertButton.addEventListener("click", () => {
   scroll.scrollLeft-=200
   }
 </script>
-<!--<script>
+<script>
   function show(){
     var cont = document.getElementById('content')
     cont.style.display='block'
@@ -360,9 +362,9 @@ closeAlertButton.addEventListener("click", () => {
     cont.style.display='none'
   }
 
-</script>-->
-<script>
-  var search=document.getElementById('search-box')
+  
+  //search bar
+ var search=document.getElementById('search-box')
   search.addEventListener('focus',(e)=>{
     search.style.width='100%'
   })
@@ -370,4 +372,4 @@ closeAlertButton.addEventListener("click", () => {
     search.style.width='70%'
   })
 
-</script>
+</script>-->

@@ -452,7 +452,6 @@ module.exports = {
             var userwhishlist = await db.get().collection(collections.WHISHLIST_COLLECTION).findOne({ userId: user })
             if (userwhishlist) {
                 var index = userwhishlist.products.findIndex(product => product.item == id)
-                console.log("index is", index)
                 if (index == -1) {
                     db.get().collection(collections.WHISHLIST_COLLECTION).updateOne({ userId: user }, {
                         $push: { products:{item:new objectId(id)} }
