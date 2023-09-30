@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="504408032003-jajn2rr5v0ahivm5rj2t649uk8t1prop.apps.googleusercontent.com">
+  <title>Flashcart</title>
+  <link rel="icon" href="/project-images/flashcart-icon.png" type="image/x-icon">
+  <link rel="stylesheet" href='/stylesheets/style.css'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> 
+   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+   <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+</head>
+
+<body style="background-color:rgb(255, 255, 255);color: rgb(0, 0, 0);">
+  
+  <header class="item-center" style="margin-bottom: 50px;">
+    <nav class="navbar navbar-expand-lg bg-body-tertia bg-color fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand text-color" style="color:white" href="/"><img src="/project-images/flashcart.png" alt="" width="40" height="40" style="border-radius: 20px;"><h4 style="display: inline;" class="m-1">Flashcart</h4></a>
+        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-2 my-Nav">
+  
+            <li class="nav-item mb-2">
+              <a class="nav-li p-1" id="nav-products" href="/">products</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a class="nav-li p-1 " id="nav-cart" href="/cart">cart <span style="color:black"
+                  class="badge badge-pill bg-white" id="cart-count">0</span></a>
+            </li>
+  
+          </ul>
+        <form class="d-flex mr-2" action="/search" method="post">
+          <input class="form-control pt-0 pb-0 " style='height: 40px;border: 1px linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));border-top-right-radius: 0;border-bottom-right-radius: 0;' type="search" placeholder="Search" name="search" aria-label="Search">
+          <button class="btn btn-outline-success bi-search s-b bg-white" style="background-image: linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));color: white;margin-right: 200px;width: auto;height: 41px; margin-top: auto;border-top-left-radius: 0;border-bottom-left-radius: 0;" type="submit"><img src="/project-images/search.png" alt="search"></button>
+        </form>
+          <div class="dropdown mt-2">
+            <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton"
+              style="border: 1px solid ;color:white; padding: 3px; margin-right: 10px;"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+  
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/login">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <script>
+   
+      var nav = ''
+  
+      if (nav == 'product') {
+        document.getElementById('nav-products').classList.add('active')
+      } else if (nav == 'cart') {
+        document.getElementById('nav-cart').classList.add('active')
+      } else if (nav == 'orders') {
+        document.getElementById('nav-orders').classList.add('active')
+      }
+  
+  
+  </script>  <section class=" section pt-3 mb-5">
+    <div class="container-fluid">
+      <div class="row mt-3">
+        <h2 class="cl">Smart Phones and Tablets</h2>
+        
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/643a76e261893e4bd20ed0a8" >
+            <img src="/product-image/643a76e261893e4bd20ed0a8.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">oppo</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.48999/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">100x zoom camera</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('643a76e261893e4bd20ed0a8',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/6426f34a94960ea65f09f440" >
+            <img src="/product-image/6426f34a94960ea65f09f440.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">iphone 11 </p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.87000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">iphone with good design and long battery life </p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('6426f34a94960ea65f09f440',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/6426f42b94960ea65f09f442" >
+            <img src="/product-image/6426f42b94960ea65f09f442.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">one plus 9T </p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.65000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">snapdragan 8 gen 1 processor </p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('6426f42b94960ea65f09f442',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/6429b7426c770453743a5936" >
+            <img src="/product-image/6429b7426c770453743a5936.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">realme c33</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.18000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">good design with good camera setup</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('6429b7426c770453743a5936',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/648c9a76089a52259b00a0ab" >
+            <img src="/product-image/648c9a76089a52259b00a0ab.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">Smart TV</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.87999/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">LED Smart TV</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('648c9a76089a52259b00a0ab',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/64ea3ed60efc0d3d0236fb88" >
+            <img src="/product-image/64ea3ed60efc0d3d0236fb88.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">Vivo y51</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.28000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">Stay connected, browse effortlessly, and capture product details in stunning clarity with the Vivo Y51</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('64ea3ed60efc0d3d0236fb88',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/64ed86557bd2866081b5ffd3" >
+            <img src="/product-image/64ed86557bd2866081b5ffd3.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">redmi note 7s</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.68000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">Redmi Note 7S Overview:
+
+The Redmi Note 7S was a mid-range smartphone produced by Xiaomi under its sub-brand Redmi. It was known for offering a good balance of performance, camera capabilities, and design aesthetics.
+
+</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('64ed86557bd2866081b5ffd3',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/642c202a7fa52693628627f6" >
+            <img src="/product-image/642c202a7fa52693628627f6.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">redmi 7s</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.63000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">pill notch display</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('642c202a7fa52693628627f6',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/64271ad5ac2c163be11ed41f" >
+            <img src="/product-image/64271ad5ac2c163be11ed41f.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">one plus Nord CE</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.30000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">good quality Camera setup in midrange</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('64271ad5ac2c163be11ed41f',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/64ed8fc75632c44e1438dbe1" >
+            <img src="/product-image/64ed8fc75632c44e1438dbe1.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">redmi note 7s</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.68000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">Redmi Note 7S Overview:
+
+The Redmi Note 7S was a mid-range smartphone produced by Xiaomi under its sub-brand Redmi. It was known for offering a good balance of performance, camera capabilities, and design aesthetics.
+
+</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('64ed8fc75632c44e1438dbe1',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/645bcd8927d7aa9730d2e312" >
+            <img src="/product-image/645bcd8927d7aa9730d2e312.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">samsung s21 ultra</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.98000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">good camera phone</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('645bcd8927d7aa9730d2e312',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/6426f27a94960ea65f09f43d" >
+            <img src="/product-image/6426f27a94960ea65f09f43d.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">iphone 13 pro</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.84000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">latest trending iphone with 13 inch screen</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >4.2 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('6426f27a94960ea65f09f43d',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/6475e69706afae859dd8ead8" >
+            <img src="/product-image/6475e69706afae859dd8ead8.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">redmi note 7s</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.145000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">new design with apple pill notch display</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('6475e69706afae859dd8ead8',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/6426f2dd94960ea65f09f43e" >
+            <img src="/product-image/6426f2dd94960ea65f09f43e.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">oppo z flip 5g</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.98000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">flip phone whith back screen dual display</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('6426f2dd94960ea65f09f43e',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+        <div class="col-6 col-md-2 product">
+        <div class="card-outer m-1" style="border: none; ">
+          <div class="card border border-shadow card-outer">
+        <a class="load" href="/detailed-view/643a7473f7825384d64260bc" >
+            <img src="/product-image/643a7473f7825384d64260bc.jpg" class="card-img-top" style="height:13em" alt="">
+            <p class="card-text">vivo</p>
+            <div class="card-body pt-0" style="line-height: 3px;">
+              <p class="card-text">Rs.98000/-</p>
+            </div>
+            <div class="pt-0 description-text" style="height: 50px;">
+              <p class="card-text mt-0">new design with apple</p>
+            </div>
+        </a>
+            <div class="mb-1">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >5.0 &#9733; </span></div>
+             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('643a7473f7825384d64260bc',)"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </section>
+ 
+  
+    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+    crossorigin="anonymous"></script>
+    
+    <script src="/javascripts/script.js"></script>
+  
+</body>
+
+</html>

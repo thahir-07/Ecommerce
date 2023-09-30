@@ -10,7 +10,7 @@ module.exports={
         })
     
      },
-     getAllProduct: () => {
+     getAllProduct: (user) => {
         return new Promise(async (resolve, reject) => {
           try {
             const products = await db.get().collection(collections.PRODUCT_COLLECTION).aggregate([
@@ -53,9 +53,32 @@ module.exports={
                   productData: 1
                 }
               }
+
             ]).toArray();
-            
             console.log("products: ", products);
+            if(user){
+               var whish=await db.get().collection(collections.WHISHLIST_COLLECTION).findOne({userId:user._id})
+               if(whish){
+                console.log(whish)
+                for(i in products) {
+                    for(ele in whish.products){
+                        if(products[i].productData._id.toString()===whish.products[ele].item.toString()){
+                            console.log(products[i].productData._id+"======"+whish.products[ele].item)
+                            console.log("element if")
+                            products[i].whish=true
+                            console.log(products[i])
+                        }
+                    }
+
+                   
+                    
+                }
+               }
+              
+               
+            }
+
+           
             resolve(products);
           } catch (error) {
             reject(error);
@@ -101,9 +124,10 @@ module.exports={
         })
 
     },
-    addToCart:(proId,userId)=>{
+    addToCart:(proId,userId,size)=>{
         let proObj={
             item:new ObjectId(proId),
+            size:size,
             quantity:1
          }
         return new Promise(async (resolve,reject)=>{
@@ -471,6 +495,40 @@ getProductRating:(pId)=>{
 updateRatingImage:(id,image)=>{
     return new Promise((resolve,reject)=>{
         db.get().collection(collections.RATE_COLLECTION).updateOne({_id:new ObjectId(id)},{$set:{images:image}})
+    })
+},
+findWhishlists:(userId)=>{
+    return new Promise(async(resolve,reject)=>{
+      var products=await db.get().collection(collections.WHISHLIST_COLLECTION).aggregate([
+        {
+            $match:{userId:new ObjectId(userId)}
+        },
+        {
+            $unwind:'$products'
+        },
+        {
+            $project:{
+                item:'$products.item'
+            }
+        },
+        {
+            $lookup:{
+                from:collections.PRODUCT_COLLECTION,
+                localField:'item',
+                foreignField:'_id',
+                as:'product'
+            }
+        },
+        {
+            $project:{
+                item:1,
+                product:{$arrayElemAt:['$product',0]
+            }
+        }
+    }
+    ]).toArray()
+        console.log(products)
+        resolve(products)
     })
 }
 }

@@ -22,6 +22,9 @@
           <li class="nav-item mb-2">
             <a class="nav-li p-1" href="/show-orders" id="nav-orders">orders</a>
           </li>
+          <li class="nav-item mb-2">
+            <a class="nav-li p-1" href="/show-whishlist" id="nav-whish"><span>❤️</span></a>
+          </li>
           {{/if}}
         </ul>
       <form class="d-flex mr-2" action="/search" method="post">
@@ -62,6 +65,9 @@
       document.getElementById('nav-cart').classList.add('active')
     } else if (nav == 'orders') {
       document.getElementById('nav-orders').classList.add('active')
+
+    }else if (nav == 'whish') {
+      document.getElementById('nav-whish').classList.add('active')
     }
 
 

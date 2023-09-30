@@ -61,6 +61,7 @@
 
 
         </div>
+        {{#if orders.reached}}
         <div class="row section-border mb-2 mt-3">
            <div class="col-12">
             <b>Track Status</b>
@@ -73,7 +74,8 @@
             {{/each}}
            </div>
         </div>
-        <div class="row">
+        {{/if}}
+        <div class="row mt-2 mb-4">
             {{#check orders 'Order canceled'}}
             <a  href="/cancel-order/{{this._id}}"><button class="btn btn-danger" style="padding: 4px;">Cancel order</button></a>
             {{/check}}

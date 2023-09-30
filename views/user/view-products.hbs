@@ -6,127 +6,6 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
   
 }
-#scroll-btn-rigt{
-  position: absolute;
-  top: 690px;
-  right: 10px;
-  z-index: 1;
-  width: 33px;
-  height: 100px;
-  background-color: rgb(246, 246, 246);
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-#scroll-btn-left{
-  position: absolute;
-  top: 690px;
-  left: 10px;
-  z-index: 1;
-  width: 33px;
-  height: 100px;
-  background-color: rgb(246, 246, 246);
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-#scroll-btn-rigt .div1{
-  width:10px;
-  height: 2px;
-  background-color: black;
-  transform: rotate(50deg);
-  margin-bottom: 5px;
-  margin-left: 3px;
-}
-#scroll-btn-rigt .div2{
-  width:10px;
-  height: 2px;
-  background-color: black;
-  transform: rotate(-50deg);
-  margin-left: 3px;
-}
-#scroll-btn-left .div1{
-  width:10px;
-  height: 2px;
-  background-color: black;
-  transform: rotate(50deg);
-  margin-bottom: 10px;
-  margin-left: 3px;
-}
-#scroll-btn-left .div2{
-  width:10px;
-  height: 2px;
-  background-color: black;
-  transform: rotate(-50deg);
-  margin-bottom: 4px;
-  margin-left: 3px;
-}
-
-
-#scroll1{
-scroll-behavior: smooth ;
-}
-#scroll-btn2-left{
-  position: absolute;
-  top: 1140px;
-  left: 10px;
-  z-index: 1;
- width: 28px;
-  height: 70px;
-  background-color: rgb(246, 246, 246);
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-#scroll-btn2-rigt{
-  position: absolute;
-  top: 1140px;
-  right: 10px;
-  z-index: 1;
-  width: 28px;
-  height: 70px;
-  background-color: rgb(246, 246, 246);
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-#scroll-btn2-rigt .div1{
-  width:10px;
-  height: 2px;
-  background-color: black;
-  transform: rotate(50deg);
-  margin-bottom: 5px;
-  margin-left: 3px;
-}
-#scroll-btn2-rigt .div2{
-  width:10px;
-  height: 2px;
-  background-color: black;
-  transform: rotate(-50deg);
-  margin-left: 3px;
-}
-#scroll-btn2-left .div1{
-  width:10px;
-  height: 2px;
-  background-color: black;
-  transform: rotate(50deg);
-  margin-bottom: 8px;
-  margin-left: 3px;
-}
-#scroll-btn2-left .div2{
-  width:10px;
-  height: 2px;
-  background-color: black;
-  transform: rotate(-50deg);
-  margin-left: 3px;
-  margin-bottom: 5px;
-}
 .ic-img{
   width: 50px;
   height: 50px;
@@ -144,59 +23,71 @@ scroll-behavior: smooth ;
    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   display: none;
 } 
+.search-box{
+  transition: width 0.5s ease-in-out ;
+ 
+}
 
 
 </style>
+<!--
+<div class="container text-center" style="padding-top:25px">
+<form class="d-flex ml-5 text-center" action="/search" method="post" >
+        <input class="form-control pt-0 pb-0 search-box" id="search-box" style='width: 70%;height: 40px;border: 1px linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));border-top-right-radius: 0;border-bottom-right-radius: 0;margin-left: auto;' type="search" placeholder="Search" name="search" aria-label="Search">
+        <button class="btn btn-outline-success bi-search s-b bg-white" style="background-image: linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));color: white;width: auto;height: 41px; margin-top: auto;border-top-left-radius: 0;border-bottom-left-radius: 0;margin-right: auto;" type="submit"><img src="/project-images/search.png" style="filter: saturate(50px);" alt="search"></button>
+      </form>
+</div>  -->
+
 <!--<div id="content" class="options text-center" style="" onmouseout="hide()"><a href="#">hello</a></div>-->
-<section class="section pt-1">
-  <div class="container-fluid text-center">
+<section class="section " >
+  <div class="container-fluid text-center m-0">
     <div class="scrolling-wrapper">
-      <div class="text-center p-1" style="display: inline-block;"  >
+      <div class="text-center " style="display: inline-block;"  >
         <a href="/offer" style="text-decoration: none;"><img style="width: 80px;height: 80px;"
-            src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/50379f65f7b59622.png?q=100" alt="" style="">
+            src="/project-images/offer.webp" alt="" style="">
           <p>Offerce</p>
         </a>
       </div>
       <div class="text-center p-1" style="display: inline-block;" >
         <a href="/mobiles-tablets" style="text-decoration: none;"><img style="width: 80px;height: 80px;"
-            src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/0a0243119f02f7a5.png?q=100" alt="" style="">
+            src="/project-images/img1.webp" alt="" style="">
           <p>Mobiles & Tablets</p>
         </a>
       </div>
       <div class="text-center p-1" style="display: inline-block;" >
         <a href="/electronics" style="text-decoration: none;"><img style="width: 80px;height: 80px;"
-            src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/da4491af4ee551d6.png?q=100" alt="" style="">
+            src="/project-images/img2.webp" alt="" style="">
           <p style="size: 5px;">Electronics</p>
         </a>
       </div>
       <div class="text-center p-1" style="display: inline-block;" >
         <a href="/tv-appliances" style="text-decoration: none;"><img style="width: 80px;height: 80px;"
-            src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/7a9da987f315df35.png?q=100" alt="" style="">
+            src="/project-images/img3.webp" alt="" style="">
           <p>TVs & Appliances</p>
         </a>
       </div>
 
       <div class="text-center p-1" style="display: inline-block;" >
         <a href="/fashion" style="text-decoration: none;"><img style="width: 80px;height: 80px;"
-            src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/f7b2a4eeb35a8c9f.png?q=100" alt="" style="">
+            src="/project-images/img4.webp" alt="" style="">
           <p>Fashion</p>
         </a>
       </div>
       <div class="text-center p-1" style="display: inline-block;" >
         <a href="/beuty" style="text-decoration: none;"><img style="width: 80px;height: 80px;"
-            src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/e83a5f27b01d9a7e.png?q=100" alt="" style="">
+            src="/project-images/img5.webp" alt="" style="">
           <p>Beauty</p>
         </a>
       </div>
       <div class="text-center p-1" style="display: inline-block;" >
         <a href="/home-appliances" style="text-decoration: none;"><img style="width: 80px;height: 80px;"
-            src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/a8cfa33c7206ae57.png?q=100" alt="" style="">
+            src="/project-images/img6.webp" alt="" style="">
           <p>Home & Appliences</p>
         </a>
       </div>
       <div class="text-center p-1" style="display: inline-block;" >
         <a href="/furniture" style="text-decoration: none;"><img style="width: 80px;height: 80px;"
-            src="https://rukminim1.flixcart.com/fk-p-flap/128/128/image/4e0bdf8567ecb960.png?q=100" alt="" style="">
+            src="/project-images/img7.webp" alt="" style="">
           <p>Furniture</p>
         </a>
       </div>
@@ -219,11 +110,10 @@ scroll-behavior: smooth ;
 <section class="section-border m-2 mb-2">
   <div class="container-fluid text-center">
     <h3>Smart Phones</h3>
-    <button onclick="scroll_right()" id="scroll-btn-rigt"><div class="div1"></div><div class="div2"></div></button>
-    <button onclick="scroll_left()" id="scroll-btn-left"><div class="div2"></div><div class="div1"></div></button>
-    <div class="scrolling-wrapper m-4" id="scroll1">
+    <div class="scrolling-wrapper" >
       {{#each product}}
       {{#product_check this 'Smartphones'}}
+       
        <div class="col-6 col-md-2 product" style="">
         <div class="card-outer m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
           <div class="card border border-shadow card-outer" >
@@ -237,10 +127,10 @@ scroll-behavior: smooth ;
               <p class="card-text mt-0">{{this.productData.description}}</p>
             </div>
         </a>
-            <div class="mb-1">
+            <div class="mb-1 ">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('{{this.productData._id}}',{{user}})"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}',{{user}})"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -255,12 +145,11 @@ scroll-behavior: smooth ;
 <section class="section-border m-2">
   <div class="container-fluid text-center">
     <h3>Fashion</h3>
-    <button onclick="scroll_left2()" id="scroll-btn2-left"><div class="div2"></div><div class="div1"></div></button>
-    <button onclick="scroll_right2()" id="scroll-btn2-rigt"><div class="div1"></div><div class="div2"></div></button>
-    <div class="scrolling-wrapper " style="margin: 21px;" id="scroll2">
+    <div class="scrolling-wrapper " >
       {{#each product}}
       {{#product_check this 'Fashion'}}
-      <div class="col-6 col-md-2 product" style="">
+      
+       <div class="col-6 col-md-2 product" >
         <div class="card-outer m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
           <div class="card border border-shadow card-outer" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
@@ -273,10 +162,10 @@ scroll-behavior: smooth ;
               <p class="card-text mt-0">{{this.productData.description}}</p>
             </div>
         </a>
-            <div class="mb-1">
+            <div class="mb-1 ">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('{{this.productData._id}}',{{user}})"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}',{{user}})"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}" >{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -298,7 +187,8 @@ scroll-behavior: smooth ;
     <div class="scrolling-wrapper">
       {{#each product}}
       {{#product_check this 'Electronics'}}
-      <div class="col-6 col-md-2 product" style="">
+      
+       <div class="col-6 col-md-2 product" style="">
         <div class="card-outer m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
           <div class="card border border-shadow card-outer" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
@@ -311,10 +201,10 @@ scroll-behavior: smooth ;
               <p class="card-text mt-0">{{this.productData.description}}</p>
             </div>
         </a>
-            <div class="mb-1">
-              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('{{this.productData._id}}',{{user}})"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+            <div class="mb-1 ">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span class="average">{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
+             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}',{{user}})"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -343,10 +233,10 @@ scroll-behavior: smooth ;
               <p class="card-text mt-0">{{this.productData.description}}</p>
             </div>
         </a>
-            <div class="mb-1">
+            <div class="mb-1 ">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('{{this.productData._id}}',{{user}})"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}',{{user}})"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -388,7 +278,7 @@ scroll-behavior: smooth ;
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h5>Contact the Developer</h5>
+                <h3>Contact the Developer</h3>
                 <!-- Social Media Icons -->
                 <div class="pt-2">
                     <a href="whatsapp://send?phone=+918277906114" class="text-light me-3"><i class="fab fa-whatsapp"><img src="/project-images/whatsapp.png" style="height: 20px;width: 20px;" alt=""></i></a>
@@ -413,7 +303,7 @@ closeAlertButton.addEventListener("click", () => {
 <script>
   var i=0
   document.getElementById('img1').checked=true
-  var images=['/project-images/ad2.jpg','/project-images/ad3.jpg']
+  var images=['/project-images/ad2.jpg','/project-images/ad3.jpg',]
   var cur=document.getElementById('ad-img').src
   images.push(cur)
   setInterval(()=>{
@@ -471,3 +361,13 @@ closeAlertButton.addEventListener("click", () => {
   }
 
 </script>-->
+<script>
+  var search=document.getElementById('search-box')
+  search.addEventListener('focus',(e)=>{
+    search.style.width='100%'
+  })
+  search.addEventListener('blur',(e)=>{
+    search.style.width='70%'
+  })
+
+</script>

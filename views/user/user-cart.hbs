@@ -1,61 +1,37 @@
 <section>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center pt-5">
-                <h1 class="pb-3">Cart Items</h1>
-                <table class="table ">
-                    <thead>
-                    <tr >
-                        <th>items </th>
-                        <th> title</th>
-                        <th>price</th>
-                        <th>quantity </th>
-                        <th>remove</th>
-                        
-                    </tr>
-                    </thead>
-                     
-                    <tbody>
-
-                        {{#each products}}
-                       
-                        <tr>
+    <div class="container ">
+        {{#each products}}
+        <div class="row">            
+                            <div class="col-3">
+                            <a href="/detailed-view/{{this.product._id}}"><img src="/product-image/{{this.product._id}}.jpg" style="width:80px;height:100px" alt=""></a></td>
+                            </div>
+                            <div class="col-3 text-center m-0"> {{this.product.name}}</div>
                           
-                           
-                            <td> <a href="/detailed-view/{{this.product._id}}"><img src="/product-image/{{this.product._id}}.jpg" style="width:100px;height:100px" alt=""></a></td>
-                            <td>{{this.product.name}}</td>
-                            <td>Rs.{{this.product.price}}/-</td>
+                           <div class="col-3 text-center "> Rs.{{this.product.price}}/-</div>
                              
-                            <td>
-                                <div class="" >
-                                    <button class="bg-color text-white qty-btn" style="border: none;padding-right: 8px; padding-left: 8px;border-radius: 2px;" onclick="changeQuantity('{{this._id}}','{{this.item}}',-1)">-</button>
+                           
+                                <div class="col-3 text-center" >
+                                    <div>
+                                    <button class="bg-color text-white qty-btn m-0" style="border: none;padding-right: 8px; padding-left: 8px;border-radius: 2px;" onclick="changeQuantity('{{this._id}}','{{this.item}}',-1)">-</button>
                                <span id="{{this.product._id}}">{{this.quantity}}</span> 
-                                <button class="bg-color text-white qty-btn"  style="border: none;border-radius: 2px;" onclick="changeQuantity('{{this._id}}','{{this.item}}',1)">+</button>
+                                <button class="bg-color text-white qty-btn m-0"  style="border: none;border-radius: 2px; margin: 0;" onclick="changeQuantity('{{this._id}}','{{this.item}}',1)">+</button><br>
+                                 <div class="mt-4 text-center m-0"> <a href="/remove/{{this.item}}" onclick=" return confirm('Are you sure! you want remove this product from cart?')" class="btn btn-danger" style="padding: 2px;margin: 0;"> Remove</a></div>
                                 </div>
+                                </div>      
+                            
+                                </div>                
                                 
-                                    
-                            </td>
-                            <td>
-                                
-                                <a href="/remove/{{this.item}}" onclick=" return confirm('Are you sure! you want remove this product from cart?')" class="btn btn-danger" style="padding: 2px;"> Remove</a>
-                               
-                            </td>
-                         
-                        </tr>
-                       
+                        <hr>
                         {{/each}}
-                        
-                        
-                        
-                    </tbody>
-                   
-                </table>
-                <hr>
-                <div class="float-rigt">
 
-                <h3 class=" mt-5">Total:Rs.<span id="total">{{total}}/-</span></h3>
-                {{#if total}}
-                <a class="btn button mt-2 mb-4" style="color: white; padding: 3px;" href="/place-order">Place Order</a>
+                        
+                   
+                <div class="text-center p-1">
+                   {{#if total}}
+
+                <h3 class="mt-2">Total:&#8377; <span id="total">{{total}}/-</span></h3>
+                
+                <a class="btn button mt-1 mb-4" style="color: white; padding: 3px;" href="/place-order">Place Order</a>
                 {{/if}}
                 </div>
 

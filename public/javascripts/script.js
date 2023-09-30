@@ -97,12 +97,31 @@ function verifyPayement(payement, order) {
     })
 
 }
-function addToCart(proId,user){
+function addToCart(proId,user,size){
+    if(size){
+        var selected_size=document.getElementsByClassName('size-border')
+        if(!selected_size[0]){
+            alert("Please select your size")
+            return
+        }else{
+            console.log(selected_size[0].innerHTML)
+            var size=selected_size[0].innerHTML
+    
+        }
+    }else{
+       size=null
+    }
        $.ajax({
-            url: "/addtocart/" + proId,
-            method: 'get',
+            url: "/addtocart",
+            method: 'post',
+            data:{
+                proId:proId,
+                size:size
+            },
             success: (response) => {
-                
+                    if(!response){
+                        location.href='/login'
+                    }
                     if (response.response != 'increment') {
                         let count = $('#cart-count').html()
                         count = parseInt(count) + 1
@@ -156,4 +175,36 @@ function changeQuantity(cartId, proId, count) {
             $('#total').html(response.total)
         }
     })
+}
+function addToWhishlist(proId){
+    var whish=document.getElementById('whishlist'+proId)
+    var whishlist=document.getElementsByClassName('whishlist'+proId)
+    if(whish.innerText=='🤍'){
+        $.ajax({
+            url:'/add_to_whishlist/'+proId,
+            method:'get',
+            success:(response)=>{
+                if(response){
+                   for(i in whishlist)
+                    whishlist[i].innerHTML='❤️'
+                }else{
+                    location.href='/login'
+                }
+            }
+        })
+    }else{
+        $.ajax({
+            url:'remove_from_whishlist/'+proId,
+            method:'get',
+            success:(response)=>{
+                if(response){
+                    for(i in whishlist)
+                    whishlist[i].innerHTML='🤍'
+                }else{
+                    location.href='/login'
+                }
+            }
+        })
+    }
+   
 }

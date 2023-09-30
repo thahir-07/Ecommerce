@@ -6,5 +6,6 @@ module.exports={
     USER_DATA:'user_info',
     GOOGLE_COLLECTION:'google_login',
     RATE_COLLECTION:'rating',
-    CONTACT_COLLECTION:'contact_us'
+    CONTACT_COLLECTION:'contact_us',
+    WHISHLIST_COLLECTION:'whishlist'
 }

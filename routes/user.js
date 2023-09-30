@@ -49,12 +49,12 @@ router.get('/auth/google/callback',
       req.session.userLoggedIn = true
       console.log("response")
       console.log(response)
-      var user = {
+      user = {
         _id: response._id,
         id: req.user.id,
         name: req.user.displayName,
         login_mode: 'google',
-        image:req.user.photos[0].value
+        image: req.user.photos[0].value
       }
       req.session.user = user
       res.redirect('/');
@@ -66,14 +66,12 @@ router.get('/auth/google/callback',
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
-  user = req.session.user
-
-  if (user) {
+  if (req.session.userLoggedIn) {
     cartItems = await productHelpers.getCartProducts(req.session.user._id)
     cartItemCount = cartItems.length
     console.log(cartItemCount.length)
   }
-  productHelpers.getAllProduct().then((product) => {
+  productHelpers.getAllProduct(user).then((product) => {
     var nav = "product"
     res.render('user/view-products', { product, admin: false, user, cartItemCount, nav })
   })
@@ -115,6 +113,7 @@ router.post('/login', function (req, res) {
     if (response.status) {
       req.session.userLoggedIn = true
       req.session.user = response.user
+      user = req.session.user
       res.redirect('/')
     } else {
       req.session.userLoginErr = "Invalid Email or Password"
@@ -139,8 +138,7 @@ router.get('/logout', function (req, res) {
 
 })
 router.get('/cart', async function (req, res) {
-  if (req.session.user) {
-
+  if (req.session.userLoggedIn) {
     cartItems = await productHelpers.getCartProducts(req.session.user._id)
     cartItemCount = cartItems.length
 
@@ -173,17 +171,18 @@ function verifyLogin(req, res, next) {
   next()
 }
 
-router.get('/addtocart/:id', (req, res) => {
-  var id = req.params.id
+router.post('/addtocart', (req, res) => {
+  var proId = req.body.proId
+  var size=req.body.size
   if (req.session.user) {
 
-    producthelper.addToCart(id, req.session.user._id).then((response) => {
+    producthelper.addToCart(proId, req.session.user._id,size).then((response) => {
       res.json(response)
     })
 
   } else {
 
-    res.redirect('/login')
+    res.json(false)
   }
 
 
@@ -227,13 +226,13 @@ router.post('/place-order', async (req, res) => {
     userHelpers.placeOrder(req.body, products, total, user._id).then((orderId) => {
       console.log(req.body)
       if (req.body.payementMethod === 'COD') {
-        res.json({ status: "COD" ,user:req.body})
+        res.json({ status: "COD", user: req.body })
 
       } else {
 
         userHelpers.generateRazorpay(orderId, total).then((response) => {
 
-          res.json({payement:response,user:req.body})
+          res.json({ payement: response, user: req.body })
         }).catch((err) => {
 
         })
@@ -247,8 +246,8 @@ router.post('/place-order', async (req, res) => {
 
 })
 router.get('/order-success', (req, res) => {
- 
-  res.render('user/order-success', {user})
+
+  res.render('user/order-success', { user })
 
 })
 router.get('/show-orders', async (req, res) => {
@@ -256,25 +255,25 @@ router.get('/show-orders', async (req, res) => {
     let orders = await userHelpers.getOrderDetails(user._id)
     let products = await userHelpers.getOrderProducts(orders)
     var nav = 'orders'
-    res.render('user/order-history', { orders, user,products, cartItemCount, nav })
+    res.render('user/order-history', { orders, user, products, cartItemCount, nav })
   }
   else {
     res.redirect('user/user-login')
   }
 })
 router.get('/view-order-products/:id', async (req, res) => {
-  
+
   let orders = await userHelpers.getOrderAddress(req.params.id)
   let products = await userHelpers.getOrderProduct(orders.products)
   console.log(products)
-  res.render('user/order-product-view', {orders,products, cartItemCount,user})
+  res.render('user/order-product-view', { orders, products, cartItemCount, user })
 })
 router.post('/verify-payement', (req, res) => {
   console.log(req.body)
   userHelpers.verifyPayement(req.body).then((response) => {
     userhelpers.changeOrderStatus(req.body['order[receipt]']).then((response) => {
       console.log('payement success')
-      userHelpers.deleteCartItem(user._id).then((response)=>{
+      userHelpers.deleteCartItem(user._id).then((response) => {
         console.log(response)
       })
       res.json({ status: true })
@@ -396,12 +395,12 @@ router.post('/search', async (req, res) => {
   var searchQuery = req.body.search.toLowerCase();
   matchedProducts = product.filter(product => {
     console.log(product)
-   
-      if (product.name.toLowerCase().includes(searchQuery) ||
-      product.productData.description.toLowerCase().includes(searchQuery) ||product.productData.subCategory.toLowerCase().includes(searchQuery)||product.productData.productCategory.toLowerCase().includes(searchQuery))
+
+    if (product.name.toLowerCase().includes(searchQuery) ||
+      product.productData.description.toLowerCase().includes(searchQuery) || product.productData.subCategory.toLowerCase().includes(searchQuery) || product.productData.productCategory.toLowerCase().includes(searchQuery))
       return true;
-   
-    
+
+
   }
 
   )
@@ -444,65 +443,100 @@ router.get('/description/:id', (req, res) => {
 })
 
 router.get('/detailed-view/:id', async (req, res) => {
-  var id=req.params.id.toString()
+  var id = req.params.id.toString()
   var product = await producthelper.getProduct(id)
   console.log(product)
-  var proRating=await producthelper.getProductRating(id)
+  var proRating = await producthelper.getProductRating(id)
   console.log("this from rating")
   console.log(proRating)
   proRating.reverse()
   var same = await producthelper.getSimilarProduct(product.subCategory)
-  res.render('user/detailed-view', { admin: false, user, cartItemCount, id: req.params.id, product, same,proRating })
+  res.render('user/detailed-view', { admin: false, user, cartItemCount, id: req.params.id, product, same, proRating })
 
 })
-router.get('/cancel-order/:id',(req,res)=>{
-  producthelper.deleteOrder(req.params.id).then((response)=>{
+router.get('/cancel-order/:id', (req, res) => {
+  producthelper.deleteOrder(req.params.id).then((response) => {
     res.redirect('/login')
   })
 })
-router.get('/rate',(req,res)=>{
- res.render('user/product-rating',{product:req.query,user})
+router.get('/rate', (req, res) => {
+  res.render('user/product-rating', { product: req.query, user })
 })
-router.post('/rate',(req,res)=>{
+router.post('/rate', (req, res) => {
   console.log(req.body)
   console.log(req.files)
-  var images=[]
- producthelper.addProductRaing(req.body).then((response)=>{
-  console.log(response)
-  var i=1
-  if(req.files){
-    for(file of req.files.images){
-      file.mv('./public/rating-images/'+response.insertedId+i+'.jpg')
-      images.push(response.insertedId+i)
-      i++
+  var images = []
+  producthelper.addProductRaing(req.body).then((response) => {
+    console.log(response)
+    var i = 1
+    if (req.files) {
+      for (file of req.files.images) {
+        file.mv('./public/rating-images/' + response.insertedId + i + '.jpg')
+        images.push(response.insertedId + i)
+        i++
+      }
     }
-  }
-  producthelper.updateRatingImage(response.insertedId,images)
-  res.redirect('/')
- })
+    producthelper.updateRatingImage(response.insertedId, images)
+    res.redirect('/')
+  })
 })
-router.get('/privacy-policy',(req,res)=>{
-  res.render('user/privacy-policy',{admin: false, user, cartItemCount})
+router.get('/privacy-policy', (req, res) => {
+  res.render('user/privacy-policy', { admin: false, user, cartItemCount })
 
 })
-router.get('/terms-of-use',(req,res)=>{
-  res.render('user/terms-of-use',{admin: false, user, cartItemCount})
+router.get('/terms-of-use', (req, res) => {
+  res.render('user/terms-of-use', { admin: false, user, cartItemCount })
 
 })
-router.get('/contact-us',(req,res)=>{
-  res.render('user/contact-us',{admin: false, user, cartItemCount})
+router.get('/contact-us', (req, res) => {
+  res.render('user/contact-us', { admin: false, user, cartItemCount })
 
 })
-router.post('/contact-us',(req,res)=>{
+router.post('/contact-us', (req, res) => {
   console.log(req.body);
   userHelpers.contact_us(req.body)
 
   res.redirect('/contact-us')
 
 })
-router.get('/cookie-policy',(req,res)=>{
-  res.render('user/cookie-policy',{admin: false, user, cartItemCount})
+router.get('/cookie-policy', (req, res) => {
+  res.render('user/cookie-policy', { admin: false, user, cartItemCount })
 
+})
+router.get('/add_to_whishlist/:id', (req, res) => {
+  var id = req.params.id
+  console.log("hello")
+  if (req.session.userLoggedIn) {
+    userHelpers.addToWishList(id, user._id).then((response) => {
+      res.json(true)
+    })
+  } else {
+    res.json(false)
+  }
+
+
+})
+router.get("/show-whishlist",async(req,res)=>{
+  if(req.session.userLoggedIn){
+    var products=await productHelpers.findWhishlists(user._id)
+    var nav = 'whish'
+    res.render('user/whishlist',{products,admin: false, user, cartItemCount,nav})
+  }
+  else{
+    res.redirect('/login')
+  }
+  
+})
+router.get('/remove_from_whishlist/:proId',(req,res)=>{
+  var proId=req.params.proId
+  if(req.session.userLoggedIn){
+  userHelpers.delete_from_whishlist(user._id,proId).then((response)=>{
+    res.json(true)
+  })
+
+  }else{
+    res.json(false)
+  }
 })
 module.exports = router
 
