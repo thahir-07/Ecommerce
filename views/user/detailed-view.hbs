@@ -119,8 +119,7 @@
                 {{/if}}
                 </div>
                 
-            <!--<div class="row text-center mt-3" style="border: 1px solid;">
-                   add to cart</div>-->
+           
 
         </div>
         
@@ -129,7 +128,7 @@
             <div class="row text-center m-1" >  
                 <div class="col-12" style="border: 1px solid; padding: 10px;margin: 2px; margin-bottom: 10px; border-radius: 5px;margin-top: 10px;">
                 <h3>{{product.name}}</h3>
-                <p class="text-left" style="align-content: start;">Price: &#8377; {{product.price}}</p>
+                <p class="text-left" style="align-content: start;">Price: <span class="amt"> {{product.price}}</span></p>
                 <div class="bg-color" style="color: rgb(255, 255, 255);font-size: larger; width: 60px;border-radius: 5px;margin-left: auto;margin-right: auto;" >{{#if proRating}}{{#total_rating proRating}}{{this}}{{/total_rating}}{{else}}5.0{{/if}}  &#9733;</div>
                 </div>
             </div>
@@ -204,7 +203,7 @@
             <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.productData.price}}/-</p>
+              <p class="card-text" ><span class="amt">{{this.productData.price}}</span></p>
             </div>
             <div class="pt-0 description-text" style="height: 50px;">
               <p class="card-text mt-0">{{this.productData.description}}</p>
@@ -212,8 +211,8 @@
         </a>
             <div class="mb-1">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('{{this.productData._id}}')"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart </button></div></div>
+             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}','{{user}}')"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -232,6 +231,15 @@
     <img src="" id="view" alt=""  style="margin-top:200px">
   </div>
   
+  
+    <div class="cus-alert" id="cus-alert">
+      please select your size
+    </div>
+
+     <div id="cus-alert2" class="custom-alert">
+        <p>Item successfully added to cart!</p>
+    </div>
+
 <script>
      var description=`{{product.description}}`
       var paragraphs = description.split('\n');
@@ -285,6 +293,19 @@ function close_window(){
        s.classList.add('size-border')
     })
 
+}
+
+ function formatIndianAmountInINR(amount) {
+  const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+  const formattedAmount = formatter.format(amount);
+  return formattedAmount;
+}
+  // Get all elements with the class name `amt`.
+const amtElements = document.querySelectorAll('.amt');
+for (const element of amtElements) {
+  const textContent = element.textContent;
+  const formattedTextContent = formatIndianAmountInINR(textContent);
+  element.textContent = formattedTextContent;
 }
 
 </script>

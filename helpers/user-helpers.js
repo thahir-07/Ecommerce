@@ -325,9 +325,9 @@ module.exports = {
             callback(err, data)
         })
     },
-    filter_products: (category1, category2) => {
+    filter_products: (user, category1, category2) => {
         return new Promise(async (resolve, reject) => {
-            var product = await db.get().collection(collections.PRODUCT_COLLECTION).aggregate([
+            var products = await db.get().collection(collections.PRODUCT_COLLECTION).aggregate([
                 {
                     $match: {
                         $or: [
@@ -374,7 +374,26 @@ module.exports = {
                     }
                 }
             ]).toArray();
-            resolve(product)
+            if (user) {
+                var whish = await db.get().collection(collections.WHISHLIST_COLLECTION).findOne({ userId: user._id })
+                if (whish) {
+                    for (i in products) {
+                        for (ele in whish.products) {
+                            if (products[i].productData._id.toString() === whish.products[ele].item.toString()) {
+                                products[i].whish = true
+
+                            }
+                        }
+
+
+
+                    }
+                }
+
+
+            }
+            resolve(products)
+
         })
     },
     getOrderProducts: (orders) => {
@@ -454,19 +473,19 @@ module.exports = {
                 var index = userwhishlist.products.findIndex(product => product.item == id)
                 if (index == -1) {
                     db.get().collection(collections.WHISHLIST_COLLECTION).updateOne({ userId: user }, {
-                        $push: { products:{item:new objectId(id)} }
+                        $push: { products: { item: new objectId(id) } }
                     }).then((response) => {
                         resolve(response)
                     })
                 }
             } else {
-                db.get().collection(collections.WHISHLIST_COLLECTION).insertOne({ userId: user, products: [{item:new objectId(id)}] })
+                db.get().collection(collections.WHISHLIST_COLLECTION).insertOne({ userId: user, products: [{ item: new objectId(id) }] })
             }
         })
     },
-    delete_from_whishlist:(user,proId)=>{
-        return new Promise((resolve,reject)=>{
-            db.get().collection(collections.WHISHLIST_COLLECTION).updateOne({userId:new ObjectId(user)},{$pull:{'products':{item:new ObjectId(proId)}}}).then((response)=>{
+    delete_from_whishlist: (user, proId) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(collections.WHISHLIST_COLLECTION).updateOne({ userId: new ObjectId(user) }, { $pull: { 'products': { item: new ObjectId(proId) } } }).then((response) => {
                 resolve(response)
             })
         })

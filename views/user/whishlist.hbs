@@ -4,14 +4,14 @@
         <h2 class="cl">Whishlists</h2>
         
         {{#each products}}
-        <div class="col-6 col-md-2 product">
-        <div class="card-outer m-1" style="border: none; ">
+        <div class="col-6 col-md-2 product mb-3">
+        <div class="card-outer p-0 me-0 mb-0" style="border: 1px solid grey; ">
           <div class="card border border-shadow card-outer">
         <a class="load" href="/detailed-view/{{this.product._id}}" >
             <img src="/product-image/{{this.product._id}}.jpg" class="card-img-top" style="height:13em" alt="">
             <p class="card-text">{{this.product.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.product.price}}/-</p>
+              <p class="card-text"><span class="amt">{{this.product.price}}</span>/-</p>
             </div>
             <div class="pt-0 description-text" style="height: 50px;">
               <p class="card-text mt-0">{{this.product.description}}</p>
@@ -19,8 +19,7 @@
         </a>
             <div class="mb-1">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-            <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="removeFromWhishlist('{{this.productData._id}}','{{user}}')"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">❤️</span></button></div></div>
+            <div class="p-0 " style="display: inline;"> <span style="font-size:20px;cursor: pointer;" id="whishlist{{this.product._id}}" class="whishlist{{this.product._id}}" onclick="remove_From_Whishlist('{{this.product._id}}')">❤️</span></div></div>
           </div>
         </div>
       </div>
@@ -29,4 +28,18 @@
       </div>
     </div>
   </section>
+  <script>
+     function formatIndianAmountInINR(amount) {
+  const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+  const formattedAmount = formatter.format(amount);
+  return formattedAmount;
+}
+  // Get all elements with the class name `amt`.
+const amtElements = document.querySelectorAll('.amt');
+for (const element of amtElements) {
+  const textContent = element.textContent;
+  const formattedTextContent = formatIndianAmountInINR(textContent);
+  element.textContent = formattedTextContent;
+}
+  </script>
   

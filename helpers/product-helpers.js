@@ -365,12 +365,11 @@ getCartProductsList:(userId)=>{
         })
     })
 
-},
-getSimilarProduct: (subCategory)=>{
+},  
+getSimilarProduct: (subCategory,user)=>{
     return new Promise(async(resolve,reject)=>{
-        let product= await db.get().collection(collections.PRODUCT_COLLECTION).aggregate([
+        let products= await db.get().collection(collections.PRODUCT_COLLECTION).aggregate([
             {
-
                 $match:{
                     subCategory:subCategory
                 }
@@ -414,7 +413,25 @@ getSimilarProduct: (subCategory)=>{
               }
             }
           ]).toArray(); 
-        resolve(product)
+        if(user){
+            var whish=await db.get().collection(collections.WHISHLIST_COLLECTION).findOne({userId:user})
+            if(whish){
+             for(i in products) {
+                 for(ele in whish.products){
+                     if(products[i].productData._id.toString()===whish.products[ele].item.toString()){
+                         products[i].whish=true
+                         
+                     }
+                 }
+
+                
+                 
+             }
+            }
+           
+            
+         }
+         resolve(products)
 
     })
 

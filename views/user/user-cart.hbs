@@ -1,5 +1,61 @@
+<style>
+    .cont {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.cart {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.cart h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+
+.empty-cart-message {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+}
+
+.empty-cart-message p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.empty-cart-message a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.empty-cart-message a:hover {
+    background-color: #0056b3;
+}
+
+</style>
+{{#if products}}
 <section>
-    <div class="container ">
+    <div class="container pt-3">
         {{#each products}}
         <div class="row">            
                             <div class="col-3">
@@ -7,7 +63,7 @@
                             </div>
                             <div class="col-3 text-center m-0"> {{this.product.name}}</div>
                           
-                           <div class="col-3 text-center "> Rs.{{this.product.price}}/-</div>
+                           <div class="col-3 text-center "> <span class="amt" >{{this.product.price}}</span></div>
                              
                            
                                 <div class="col-3 text-center" >
@@ -29,7 +85,7 @@
                 <div class="text-center p-1">
                    {{#if total}}
 
-                <h3 class="mt-2">Total:&#8377; <span id="total">{{total}}/-</span></h3>
+                <h3 class="mt-2">Total : <span class="amt" id="total">{{total}}</span></h3>
                 
                 <a class="btn button mt-1 mb-4" style="color: white; padding: 3px;" href="/place-order">Place Order</a>
                 {{/if}}
@@ -44,4 +100,70 @@
      
    
 </section>
+{{else}}
+<div class="cont">
+ <div class="cart">
+       
+        <div class="cart-items">
+            <!-- You can put your cart items here dynamically -->
+        </div>
+        <div class="empty-cart-message">
+            <p>Your cart is currently empty.</p>
+            <a href="/">Continue Shopping</a>
+        </div>
+    </div>
+    </div>
+   
+{{/if}}
+<script>
+ function formatIndianAmountInINR(amount) {
+  const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+  const formattedAmount = formatter.format(amount);
+  return formattedAmount;
+}
+  // Get all elements with the class name `amt`.
+const amtElements = document.querySelectorAll('.amt');
+for (const element of amtElements) {
+  const textContent = element.textContent;
+  const formattedTextContent = formatIndianAmountInINR(textContent);
+  element.textContent = formattedTextContent;
+}
+</script>
+
+
+
+   <!-- <div class="container mt-5">
+        <h1>Your Cart</h1>
+
+         
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Product 1</h5>
+                        <p class="card-text">Price: $10.00</p>
+                        <p class="card-text">Quantity: 2</p>
+                        <button class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Subtotal</h5>
+                        <p class="card-text">Items: 2</p>
+                        <p class="card-text">Total: $20.00</p>
+                        <button class="btn btn-primary">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="mt-3 text-center">
+            <p>Your cart is currently empty.</p>
+            <a href="#" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    </div>-->
+
 

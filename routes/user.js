@@ -173,10 +173,10 @@ function verifyLogin(req, res, next) {
 
 router.post('/addtocart', (req, res) => {
   var proId = req.body.proId
-  var size=req.body.size
+  var size = req.body.size
   if (req.session.user) {
 
-    producthelper.addToCart(proId, req.session.user._id,size).then((response) => {
+    producthelper.addToCart(proId, req.session.user._id, size).then((response) => {
       res.json(response)
     })
 
@@ -391,7 +391,7 @@ router.get('/offer', (req, res) => {
 router.post('/search', async (req, res) => {
   console.log(req.body.search)
   let matchedProducts = null
-  let product = await producthelper.getAllProduct()
+  let product = await producthelper.getAllProduct(user)
   var searchQuery = req.body.search.toLowerCase();
   matchedProducts = product.filter(product => {
     console.log(product)
@@ -410,19 +410,19 @@ router.post('/search', async (req, res) => {
 
 
 router.get('/mobiles-tablets', async (req, res) => {
-  var product = await userHelpers.filter_products('Smartphones', 'Tablet')
+  var product = await userHelpers.filter_products(user,'Smartphones', 'Tablet')
   res.render('user/mobiles-tablets', { product, admin: false, user, cartItemCount })
 })
 router.get('/electronics', async (req, res) => {
-  var product = await userHelpers.filter_products('electronic', 'electronics')
+  var product = await userHelpers.filter_products(user,'Electronic', 'Electronics')
   res.render('user/electronics', { product, admin: false, user, cartItemCount })
 })
 router.get('/tv-appliances', async (req, res) => {
-  var product = await userHelpers.filter_products('tv', 'appliances')
+  var product = await userHelpers.filter_products(user,'tv', 'appliances')
   res.render('user/tv-appliances', { product, admin: false, user, cartItemCount })
 })
 router.get('/fashion', async (req, res) => {
-  var product = await userHelpers.filter_products('fashion', 'cloths')
+  var product = await userHelpers.filter_products(user,'fashion', 'cloths')
   res.render('user/fashion', { product, admin: false, user, cartItemCount })
 })
 router.get('/beuty', async (req, res) => {
@@ -450,9 +450,14 @@ router.get('/detailed-view/:id', async (req, res) => {
   console.log("this from rating")
   console.log(proRating)
   proRating.reverse()
-  var same = await producthelper.getSimilarProduct(product.subCategory)
-  res.render('user/detailed-view', { admin: false, user, cartItemCount, id: req.params.id, product, same, proRating })
+  var uid
+  if (req.session.userLoggedIn)
+    uid = user._id
+  else
+    uid = false
 
+  var same = await producthelper.getSimilarProduct(product.subCategory, uid)
+  res.render('user/detailed-view', { admin: false, user, cartItemCount, id: req.params.id, product, same, proRating })
 })
 router.get('/cancel-order/:id', (req, res) => {
   producthelper.deleteOrder(req.params.id).then((response) => {
@@ -505,39 +510,40 @@ router.get('/cookie-policy', (req, res) => {
 })
 router.get('/add_to_whishlist/:id', (req, res) => {
   var id = req.params.id
-  if (req.session.userLoggedIn){
-    userHelpers.addToWishList(id,user._id).then((response) => {
-      res.json({value:response})
+  if (req.session.userLoggedIn) {
+    userHelpers.addToWishList(id, user._id).then((response) => {
+      res.json({ value: response })
     })
   } else {
-    res.json({value:false})
+    res.json({ value: false })
   }
 
 
 })
-router.get("/show-whishlist",async(req,res)=>{
-  if(req.session.userLoggedIn){
-    var products=await productHelpers.findWhishlists(user._id)
+router.get("/show-whishlist", async (req, res) => {
+  if (req.session.userLoggedIn) {
+    var products = await productHelpers.findWhishlists(user._id)
     var nav = 'whish'
-    res.render('user/whishlist',{products,admin: false, user, cartItemCount,nav})
+    res.render('user/whishlist', { products, admin: false, user, cartItemCount, nav })
   }
-  else{
+  else {
     res.redirect('/login')
   }
-  
-})
-router.get('/remove_from_whishlist/:proId',(req,res)=>{
-  var proId=req.params.proId
-  if(req.session.userLoggedIn){
-  userHelpers.delete_from_whishlist(user._id,proId).then((response)=>{
-    res.json({value:true})
-  })
 
-  }else{
-    res.json({value:false})
+})
+router.get('/remove_from_whishlist/:proId', (req, res) => {
+  var proId = req.params.proId
+  if (req.session.userLoggedIn) {
+    userHelpers.delete_from_whishlist(user._id, proId).then((response) => {
+      res.json({ value: true })
+    })
+
+  } else {
+    res.json({ value: false })
   }
 })
 module.exports = router
 
+    
 
 

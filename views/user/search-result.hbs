@@ -9,28 +9,85 @@
     font-size: 15px;
     line-height: 17px;
   }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            width: 90%;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #e74c3c; /* Red color */
+        }
+
+        p {
+            color: #333;
+        }
+
+        .search-icon {
+            font-size: 36px;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
 </style>
+{{#if matchedProducts}}
 <section class=" section pt-3 ">
     <div class="container-fluid ">
       <div class="row text-center align-item-center">
         {{#each matchedProducts}}
         
-        <div class="col-6 col-md-4 col-lg-2 mt-3 text-center fixed " >
-          <a href="/detailed-view/{{this.productData._id}}">
-          <div class="card  border-shadow "style="">
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:13em" alt="">
-            <p class="card-text">{{this.name}}</p>
+        <div class="col-6 col-md-2 p-0" >
+        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
+          <div class="card border border-shadow card-outer" >
+        <a class="load" href="/detailed-view/{{this.productData._id}}" >
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
+            <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.productData.price}}/-</p></div>
-              <div class="pt-0 dsc"><p class="card-text mt-0">{{this.productData.description}}</p></div>  
-              <div class="mb-2"><button class="btn button p-1" onclick="addToCart('{{this.productData._id}}',{{user}})"  style="color: rgb(255, 255, 255);" >Add to cart</button></div>
-               
+              <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
+            </div>
+            <div class="pt-0 description-text" style="display: block;overflow: break-word;height: 20px;">
+              <p class="card-text mt-0">{{this.productData.description}}</p>
+            </div>
+        </a>
+            <div class="mb-1 ">
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
+             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}','{{user}}')"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
-           </a>
         </div>
+      </div>
        
         {{/each}}
 
       </div>
     </div>
   </section>
+  {{else}}
+ 
+   
+
+    <div class="container">
+        <i class="search-icon">&#128269;</i>
+        <h1>Search Result Not Found</h1>
+        <p>We couldn't find any results matching your search.</p>
+    </div>
+
+
+  {{/if}}
+  <script>
+     function formatIndianAmountInINR(amount) {
+  const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+  const formattedAmount = formatter.format(amount);
+  return formattedAmount;
+}
+  // Get all elements with the class name `amt`.
+const amtElements = document.querySelectorAll('.amt');
+for (const element of amtElements) {
+  const textContent = element.textContent;
+  const formattedTextContent = formatIndianAmountInINR(textContent);
+  element.textContent = formattedTextContent;
+}
+  </script>

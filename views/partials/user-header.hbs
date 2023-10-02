@@ -27,10 +27,12 @@
           </li>
           {{/if}}
         </ul>
-      <form class="d-flex mr-2" action="/search" method="post">
+        <div id="search-lap">
+      <form class="d-flex mr-2"  action="/search" method="post">
         <input class="form-control pt-0 pb-0 " style='height: 40px;border: 1px linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));border-top-right-radius: 0;border-bottom-right-radius: 0;' type="search" placeholder="Search" name="search" aria-label="Search">
         <button class="btn btn-outline-success bi-search s-b bg-white" style="background-image: linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));color: white;margin-right: 200px;width: auto;height: 41px; margin-top: auto;border-top-left-radius: 0;border-bottom-left-radius: 0;" type="submit"><img src="/project-images/search.png" alt="search"></button>
       </form>
+    </div>
         <div class="dropdown mt-2">
           <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton"
             style="border: 1px solid ;color:white; padding: 3px; margin-right: 10px;"

@@ -1,3 +1,15 @@
+if (window.innerWidth <= 768) {
+    document.getElementById('search-lap').style.display='none'
+} else{
+    document.getElementById('search-smartphone').style.display='none'
+}
+window.addEventListener('resize',()=>{
+    if (window.innerWidth <= 768) {
+        document.getElementById('search-lap').style.display='none'
+    } else{
+        document.getElementById('search-smartphone').style.display='none'
+    } 
+})
 window.addEventListener('pageshow',(event)=>{
     if(event.persisted){
         location.reload()
@@ -13,6 +25,12 @@ function count(id){
 
 
 }
+
+function formatIndianAmountInINR(amount) {
+    const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+    const formattedAmount = formatter.format(amount);
+    return formattedAmount;
+  }
 $("#checkout-form").submit((e) => {
     console.log('ajaxxxxxxxxxxxxxxxxxxxxxxx')
     e.preventDefault()
@@ -96,7 +114,10 @@ function addToCart(proId,user,size){
     if(size){
         var selected_size=document.getElementsByClassName('size-border')
         if(!selected_size[0]){
-            alert("Please select your size")
+            document.getElementById('cus-alert').style.display='block'
+            setTimeout(()=>{
+                document.getElementById('cus-alert').style.display='none'
+            },1000)
             return
         }else{
             console.log(selected_size[0].innerHTML)
@@ -121,11 +142,17 @@ function addToCart(proId,user,size){
                         let count = $('#cart-count').html()
                         count = parseInt(count) + 1
                         $('#cart-count').html(count)
+                        document.getElementById('cus-alert2').style.display='block'
+                            setTimeout(()=>{
+                                document.getElementById('cus-alert2').style.display='none'
+                            },1000)
                     }
                     else {
                         
-                            customAlert.style.display = "flex";
-                            
+                            document.getElementById('cus-alert2').style.display='block'
+                            setTimeout(()=>{
+                                document.getElementById('cus-alert2').style.display='none'
+                            },1000)
 
                        
                     }
@@ -133,9 +160,9 @@ function addToCart(proId,user,size){
                 
             }
         })
-   
 
 }
+
 function changeQuantity(cartId, proId, count) {
     let quantity = parseInt(document.getElementById(proId).innerHTML)
 
@@ -167,7 +194,7 @@ function changeQuantity(cartId, proId, count) {
                 }
             }
 
-            $('#total').html(response.total)
+            $('#total').html(formatIndianAmountInINR(response.total))
         }
     })
 }
@@ -176,7 +203,7 @@ function addToWhishlist(proId){
     var whishlist=document.getElementsByClassName('whishlist'+proId)
     if(whish.innerText=='🤍'){
         $.ajax({
-            url:'/add_to_whishlist/'+proId,
+            url:'/add_to_whishlist/'+proId, 
             method:'get',
             success:(response)=>{
                 if(response.value){
@@ -207,13 +234,13 @@ function addToWhishlist(proId){
 
    
 }
-function removeFromWhishlist(proId){
+function remove_From_Whishlist(proId){
     $.ajax({
         url:'/remove_from_whishlist/'+proId,
         method:'get',
         success:(response)=>{
-            location.reload()
+           location.reload()
         }
     })
-
 }
+

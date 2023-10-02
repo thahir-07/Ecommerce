@@ -1,4 +1,4 @@
-<section class=" section pt-3 mb-5">
+<section class="section mb-5">
     <div class="container-fluid">
       <div class="row mt-3">
         <h2 class="cl">Smart Phones and Tablets</h2>
@@ -19,8 +19,8 @@
         </a>
             <div class="mb-1">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('{{this.productData._id}}',{{user}})"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}','{{user}}')"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>

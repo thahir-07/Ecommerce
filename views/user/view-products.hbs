@@ -27,16 +27,19 @@
   transition: width 0.5s ease-in-out ;
  
 }
+.search-box:focus{
+  width :90% !important;
+}
 
 
 </style>
-<!--
-<div class="container text-center" style="padding-top:25px">
+
+<div class="container text-center" id="search-smartphone">
 <form class="d-flex ml-5 text-center" action="/search" method="post" >
         <input class="form-control pt-0 pb-0 search-box" id="search-box" style='width: 70%;height: 40px;border: 1px linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));border-top-right-radius: 0;border-bottom-right-radius: 0;margin-left: auto;' type="search" placeholder="Search" name="search" aria-label="Search">
-        <button class="btn btn-outline-success bi-search s-b bg-white" style="background-image: linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));color: white;width: auto;height: 41px; margin-top: auto;border-top-left-radius: 0;border-bottom-left-radius: 0;margin-right: auto;" type="submit"><img src="/project-images/search.png" style="filter: saturate(50px);" alt="search"></button>
+        <button class="btn btn-outline-success bi-search s-b bg-white" style="background-image: linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));color: white;width: auto;height: 40px; margin-top: auto;border-top-left-radius: 0;border-bottom-left-radius: 0;margin-right: auto;" type="submit"><img src="/project-images/search.png" style="filter: saturate(50px);" alt="search"></button>
       </form>
-</div>  -->
+</div> 
 
 <!--<div id="content" class="options text-center" style="" onmouseout="hide()"><a href="#">hello</a></div>-->
 <section class="section " >
@@ -121,7 +124,7 @@
             <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.productData.price}}/-</p>
+              <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
             </div>
             <div class="pt-0 description-text" style="display: block;overflow: break-word;">
               <p class="card-text mt-0">{{this.productData.description}}</p>
@@ -156,7 +159,7 @@
             <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.productData.price}}/-</p>
+              <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
             </div>
             <div class="pt-0 description-text" style="display: block;overflow: break-word;">
               <p class="card-text mt-0">{{this.productData.description}}</p>
@@ -195,7 +198,7 @@
             <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.productData.price}}/-</p>
+              <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
             </div>
             <div class="pt-0 description-text" style="display: block;overflow: break-word;">
               <p class="card-text mt-0">{{this.productData.description}}</p>
@@ -214,22 +217,22 @@
   </div>
 </section>
 
-<section class="section-border m-2">
+<section class="section-border pb-3">
   <div class="container-fluid text-center">
     <h3>Most Searched</h3>
-    <div class="scrolling-wrapper">
+     <div class="row">
+    
       {{#each product}}
-      
-       <div class="col-6 col-md-2 product" style="">
-        <div class="card-outer m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
+       <div class="col-6 col-md-2 p-0" >
+        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
           <div class="card border border-shadow card-outer" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
             <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.productData.price}}/-</p>
+              <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
             </div>
-            <div class="pt-0 description-text" style="display: block;overflow: break-word;">
+            <div class="pt-0 description-text" style="display: block;overflow: break-word;height: 20px;">
               <p class="card-text mt-0">{{this.productData.description}}</p>
             </div>
         </a>
@@ -240,18 +243,13 @@
           </div>
         </div>
       </div>
+      
       {{/each}}
     </div>
   </div>
   
   
-  <div class="custom-alert b-1" style="z-index: 5;" id="custom-alert">
-    <div class="alert-content">
-      <h2 id="cus-t"><img class="ic-img" src="/project-images/flashcart-icon.png" alt=""> Flashcart</h2>
-      <p id="cus-m">Item already exist in cart ,item count incremented</p>
-      <button id="close-alert">Close</button>
-    </div>
-  </div>
+ 
 </section>
 <footer>
         <div class="container text-center">
@@ -294,11 +292,6 @@
 
 
 <script>
-  const customAlert = document.getElementById("custom-alert");
-const closeAlertButton = document.getElementById("close-alert");
-closeAlertButton.addEventListener("click", () => {
-  customAlert.style.display = "none";
-});
 
 //ad section
   var i=0
@@ -332,6 +325,20 @@ closeAlertButton.addEventListener("click", () => {
   })
 
 </script>
+<script>
+   function formatIndianAmountInINR(amount) {
+  const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+  const formattedAmount = formatter.format(amount);
+  return formattedAmount;
+}
+  // Get all elements with the class name `amt`.
+const amtElements = document.querySelectorAll('.amt');
+for (const element of amtElements) {
+  const textContent = element.textContent;
+  const formattedTextContent = formatIndianAmountInINR(textContent);
+  element.textContent = formattedTextContent;
+}
+</script>
 
 <!--<script>
   function scroll_right(){
@@ -362,7 +369,7 @@ closeAlertButton.addEventListener("click", () => {
     cont.style.display='none'
   }
 
-  
+
   //search bar
  var search=document.getElementById('search-box')
   search.addEventListener('focus',(e)=>{

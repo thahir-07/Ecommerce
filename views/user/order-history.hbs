@@ -52,7 +52,7 @@
                             <p>{{this.product.name}}</p>
                         </div>
                         <div class="col-3  ">
-                            <p>&#8377;{{this.product.price}}</p>
+                            <p><span class="amt">{{this.product.price}}</span></p>
                         </div>
                          <div class="col-3">
                              <a href="/view-order-products/{{this._id}}" class="btn button text-white p-1 view-btn" >viw details</a>
@@ -66,4 +66,17 @@
 
         </div>
     </div>
-    
+    <script>
+         function formatIndianAmountInINR(amount) {
+  const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+  const formattedAmount = formatter.format(amount);
+  return formattedAmount;
+}
+  // Get all elements with the class name `amt`.
+const amtElements = document.querySelectorAll('.amt');
+for (const element of amtElements) {
+  const textContent = element.textContent;
+  const formattedTextContent = formatIndianAmountInINR(textContent);
+  element.textContent = formattedTextContent;
+}
+    </script>
