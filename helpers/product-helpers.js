@@ -100,7 +100,6 @@ module.exports={
     getProduct: (proId)=>{
         return new Promise(async(resolve,reject)=>{
             let product= await db.get().collection(collections.PRODUCT_COLLECTION).findOne({_id:new ObjectId(proId)})
-
             resolve(product)
 
 
@@ -366,12 +365,13 @@ getCartProductsList:(userId)=>{
     })
 
 },  
-getSimilarProduct: (subCategory,user)=>{
+getSimilarProduct: (subCategory,user,id)=>{
     return new Promise(async(resolve,reject)=>{
         let products= await db.get().collection(collections.PRODUCT_COLLECTION).aggregate([
             {
                 $match:{
-                    subCategory:subCategory
+                    subCategory:subCategory,
+                    _id: { $ne: new ObjectId(id) }
                 }
             },{
               $lookup: {
@@ -503,8 +503,6 @@ getProductRating:(pId)=>{
             }
         }
     ]).toArray()
-    console.log("this from aggregate")
-    console.log(rating)
     resolve(rating)
 }
        
@@ -518,7 +516,7 @@ findWhishlists:(userId)=>{
     return new Promise(async(resolve,reject)=>{
       var products=await db.get().collection(collections.WHISHLIST_COLLECTION).aggregate([
         {
-            $match:{userId:new ObjectId(userId)}
+            $match:{userId:userId}
         },
         {
             $unwind:'$products'

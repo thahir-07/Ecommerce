@@ -7,9 +7,9 @@
                 <div class="side-bar sb">
                     <div class="user-info text-center">
                         {{#if google}}
-                            <img class="img-profile rounded-circle img-responsive center-block profile-img mt-4"  src={{gProfile.photo}} alt="image not found">
+                            <img class="img-profile rounded-circle img-responsive center-block profile-img mt-4 profile_img_change" src={{gProfile.photo}} alt="image not found">
                         {{else}}
-                        <img class="img-profile rounded-circle img-responsive center-block profile-img mt-4"  src="/user-image/{{profile.userid}}.jpg" >
+                        <img class="img-profile rounded-circle img-responsive center-block profile-img mt-4 profile_img_change" src="/user-image/{{profile.userid}}.jpg" >
                         {{/if}}
                         <ul class="meta list list-unstyled">
                             <li><h3>{{user.name}}</h3> </li>
@@ -33,9 +33,9 @@
                             <div class="form-group avatar">
                                 <figure class="figure col-md-2 col-sm-3 col-xs-12">
                                     {{#if google}}
-                                    <img class="rounded-circle img-responsive " id="profile_img_change" src={{gProfile.photo}} alt="Profile">
+                                    <img class="rounded-circle img-responsive profile_img_change" src={{gProfile.photo}} alt="Profile">
                                     {{else}}
-                                    <img class="rounded-circle img-responsive " id="profile_img_change" src="/user-image/{{profile.userid}}.jpg" alt="Profile">
+                                    <img class="rounded-circle img-responsive profile_img_change"  src="/user-image/{{profile.userid}}.jpg" alt="Profile">
                                     {{/if}}
                                 </figure>
                                 <div class="form-inline col-md-10 col-sm-9 col-xs-12">
@@ -152,9 +152,12 @@
         console.log(event)
         document.getElementById('profile_img_change').src=URL.createObjectURL(event.target.files[0])
     }
-    document.getElementById('profile_img_change').addEventListener('error',()=>{
+    var img=document.getElementsByClassName('profile_img_change')
+    for(var i in img){
+        img[i].addEventListener('error',()=>{
         document.getElementById('profile_img_change').src='/project-images/user.jpg'
     })
+    }
 var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 if (screenWidth <= 768) {
    var images=document.getElementsByClassName('profile-img')

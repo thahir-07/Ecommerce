@@ -1,31 +1,35 @@
-<section class=" section pt-3">
-    <div class="container-fluid">
-      <div class="row text-center">
-        <h2>Electronics</h2>
-        {{#each product}}
-        <div class="col-6 col-md-2 product">
-        <div class="card-outer m-1" style="border: none; ">
-          <div class="card border border-shadow card-outer">
+  <section class="section-border pb-3">
+  <div class="container-fluid text-center">
+    <h2>Electronics</h2>
+     <div class="row">
+    
+      {{#each product}}
+       <div class="col-6 col-md-2 p-0" >
+        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
+          <div class="card border border-shadow card-outer" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:13em" alt="">
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text">Rs.{{this.productData.price}}/-</p>
+              <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
             </div>
-            <div class="pt-0 description-text" style="height: 50px;">
+            <div class="pt-0 description-text" style="display: block;overflow: break-word;height: 20px;">
               <p class="card-text mt-0">{{this.productData.description}}</p>
             </div>
         </a>
-            <div class="mb-1">
+            <div class="mb-1 ">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-             <div class="p-0" style="display: inline;"> <button class="btn button mb-1" onclick="addToCart('{{this.productData._id}}',{{user}})"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" >Add to cart</button></div></div>
+             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}','{{user}}')"
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
-        {{/each}}
-
-      </div>
+      
+      {{/each}}
     </div>
-  </section>
+  </div>
+  
+  
+ 
+</section>
   

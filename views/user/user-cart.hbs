@@ -51,11 +51,22 @@
 .empty-cart-message a:hover {
     background-color: #0056b3;
 }
-
+.confirm{
+display: none;
+position: fixed;
+top: 30%;
+left: 50%;
+width: max-content;
+transform: translate(-50%,-70%);
+background-color: #ffffff;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+padding:20px;
+border-radius: 5px;
+}
 </style>
 {{#if products}}
 <section>
-    <div class="container pt-3">
+    <div class="container pt-4">
         {{#each products}}
         <div class="row">            
                             <div class="col-3">
@@ -71,7 +82,7 @@
                                     <button class="bg-color text-white qty-btn m-0" style="border: none;padding-right: 8px; padding-left: 8px;border-radius: 2px;" onclick="changeQuantity('{{this._id}}','{{this.item}}',-1)">-</button>
                                <span id="{{this.product._id}}">{{this.quantity}}</span> 
                                 <button class="bg-color text-white qty-btn m-0"  style="border: none;border-radius: 2px; margin: 0;" onclick="changeQuantity('{{this._id}}','{{this.item}}',1)">+</button><br>
-                                 <div class="mt-4 text-center m-0"> <a href="/remove/{{this.item}}" onclick=" return confirm('Are you sure! you want remove this product from cart?')" class="btn btn-danger" style="padding: 2px;margin: 0;"> Remove</a></div>
+                                 <div class="mt-4 text-center m-0"> <button onclick="confirmation('{{this.item}}')" class="btn btn-danger" style="padding: 2px;margin: 0;"> Remove</button></div>
                                 </div>
                                 </div>      
                             
@@ -109,12 +120,17 @@
         </div>
         <div class="empty-cart-message">
             <p>Your cart is currently empty.</p>
-            <a href="/">Continue Shopping</a>
+            <a href="/" class="button">Continue Shopping</a>
         </div>
     </div>
     </div>
-   
 {{/if}}
+
+<div id="confirm" class="confirm text-center">
+        <p>Are you sure you want to remove this item?</p>
+        <button class="btn btn-danger" id="yes">Yes</button>
+        <button class="btn btn-info " style="color: white;" id="no">No</button>
+    </div>
 <script>
  function formatIndianAmountInINR(amount) {
   const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
@@ -130,7 +146,20 @@ for (const element of amtElements) {
 }
 </script>
 
+<script>
+function confirmation(item){
+    document.getElementById('confirm').style.display='block'
+    document.getElementById('yes').addEventListener('click',()=>{
+        document.getElementById('confirm').style.display='none'
+        location.href=`/remove/${item}`
+    })
+    document.getElementById('no').addEventListener('click',()=>{
+        document.getElementById('confirm').style.display='none'
+        return
+    })
 
+}
+</script>
 
    <!-- <div class="container mt-5">
         <h1>Your Cart</h1>

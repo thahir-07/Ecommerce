@@ -26,7 +26,7 @@
             </div>
             <div class="col-12 col-lg-6 mt-2" >
                 <div style="font-weight: 700;">Payement Method : {{orders.payementMethod}} </div>
-                <div class="mt-2" style="font-weight: 500;">Total : &#8377;{{orders.total}}</div>
+                <div class="mt-2" style="font-weight: 500;">Total : <span class="amt">{{orders.total}}</span></div>
                 <div class="mt-2" style="font-weight: 500;">Order Status : {{orders.status}}</div>
                 <div></div>
             </div>
@@ -82,6 +82,18 @@
         </div>
 
     </div>
-
-
 </section>
+<script>
+     function formatIndianAmountInINR(amount) {
+  const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+  const formattedAmount = formatter.format(amount);
+  return formattedAmount;
+}
+  // Get all elements with the class name `amt`.
+const amtElements = document.querySelectorAll('.amt');
+for (const element of amtElements) {
+  const textContent = element.textContent;
+  const formattedTextContent = formatIndianAmountInINR(textContent);
+  element.textContent = formattedTextContent;
+}
+</script>

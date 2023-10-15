@@ -1,42 +1,50 @@
 <style>
      .signup{
-       
         width: fit-content;
         margin-left: auto;
         margin-right: auto;
         padding: 30px;
+       
+        margin-bottom: 50%;
         border-radius: 10px;
        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-       background-color: rgba(244, 252, 241, 0.371);
+       background-color: rgba(255, 255, 255, 0.371);
     }
+        input{
+            height: 45px;
+        }
+       
+        
 </style>
-<section class="mb-5 mt-3">
+<section class=" mt-3">
 
     <div class="container-fluid pt-4 m-auto">
         <div class="row pt-4">
             <div class="signup">
-            <form action="/signup" class="text-center" method="post">
-                <div>
-                    <h2>Create New Account</h2>
-                </div>
-                <div class="form-group pt-5"> <input class="text-center border border-shadow inp" type="text"
+            <form class="text-center" id="verify-email">
+                
+                    <h2>Signup</h2>
+                
+                <div>Already have account?<a class="a-new" href="/login">login</a></div>
+                <div class="form-group pt-2"> <input class="text-center border border-shadow inp" type="text"
                         placeholder="Name" name="name" required></div>
-                <div class="form-group pt-3"> <input class="text-center border border-shadow inp" type="text"
+                <div class="form-group pt-2"> <input class="text-center border border-shadow inp" type="email"
                         placeholder="Email" name="email" required></div>
-                <div class="form-group pt-3"><input class="text-center border border-shadow inp" type="password"
+
+                <div class="form-group pt-2"><input class="text-center border border-shadow inp" id="pas" min="6" max="15" type="password"
                         placeholder="Password" name="password" required></div>
-                        {{#if err}}
+                <div class="form-group pt-2"><input class="text-center border border-shadow inp" id="c-pas" min="6" max="15" type="password"
+                        placeholder="Confirm password" name="c_password" required></div>
                     <div style="color:red">
-                        <p>{{err}}</p>
+                        <p id="err"></p>
                     </div>
-                    {{/if}}
-                <div><a class="a-new" href="/login">Already have account?</a></div>
                  
-                <div class="pt-3 mb-3"><input class="btn btn-info text-white" type="submit" role="button" value="signp">
+                <div class="pt-2 mb-2" ><input class="btn btn-success text-white" style=" height: 40px !important; width: 100%;" type="submit"  value="signp">
                 </div>
-                <div style="margin-left: auto;">    
-                            <a href="/auth/google" class="mt-5"
-                                style="background-color: rgb(251, 251, 250);border 1px solid;text-decoration: none;color: black; border: 1px solid;padding: 5px; padding-bottom: 10px;border-radius: 5px;">
+                <hr>
+                <div class="pt-2" style="margin-left: auto; width: 100%;">    
+                            <a href="/auth/google" class=""
+                                style="background-color: rgb(251, 251, 250);box;text-decoration: none;color: black;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);padding: 5px; padding-bottom: 10px;border-radius: 2px;padding: 15px;">
                                 <img src="/project-images/google.png" width="30px" height="30px"
                                     alt="Login with Google"><span style="padding-left: 2px;">Signup with google</span>         
                             </a>
@@ -46,3 +54,30 @@
         </div>
     </div>
 </section>
+
+  <div class="otp-cont" id="otp-cont">
+     <div class="container otp-container text-center">
+        <h2>Enter 4-Digit OTP</h2>
+        <p>Please enter the 4-digit OTP sent to your email address.</p>
+        
+        <div class="form-group">
+            <form action="" id="otp-form">
+            <input type="password" class="otp-input" id="otp1" name="otp1" maxlength="1" required inputmode="numeric">
+            <input type="password" class="otp-input" id="otp2" name="otp2" maxlength="1" required inputmode="numeric">
+            <input type="password" class="otp-input" id="otp3" name="otp3" maxlength="1" required inputmode="numeric">
+            <input type="password" class="otp-input" id="otp4" name="otp4" maxlength="1" required inputmode="numeric">
+            
+        </div>
+        <div style="color:red">
+                        <h5 id="err-otp"></h5>
+                    </div>
+        <div>
+            <span id="res">Resend otp in: 00:</span><span id="timer">30</span><span class="btn" type="button" id="resend" onclick="resend_otp()" style="text-decoration: underline;color: blue;border: none;"></span>
+        </div>
+        <button type="submit" class="btn btn-primary button m-2">Verify OTP</button>
+        </form>
+    </div>
+  </div>
+ 
+       
+    

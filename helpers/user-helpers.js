@@ -12,17 +12,13 @@ var instance = new Razorpay({ key_id: 'rzp_test_0lu74rFyib3blw', key_secret: 'XK
 module.exports = {
     doSignup: (userdata) => {
         return new Promise(async (resolve, reject) => {
-            db.get().collection(collections.USER_COLLECTION).findOne({ email: userdata.email }).then((response) => {
-                if (response) {
-                    resolve({ err: "user already exist" })
-                }
-            })
-            db.get().collection(collections.GOOGLE_COLLECTION).findOne({ email: userdata.email }).then((response) => {
+           /* db.get().collection(collections.GOOGLE_COLLECTION).findOne({ email: userdata.email }).then((response) => {
                 if (response) {
                     resolve({ err: "try using google login or signup" })
                 }
-            })
+            })*/
             userdata.password = await bcrypt.hash(userdata.password, 10)
+            userdata.c_password=await bcrypt.hash(userdata.c_password, 10)
             db.get().collection(collections.USER_COLLECTION).insertOne(userdata).then((data) => {
                 console.log(data)
                 db.get().collection(collections.USER_COLLECTION).findOne({ _id: new objectId(data.insertedId) }).then((response) => {
@@ -312,7 +308,7 @@ module.exports = {
 
 
     },
-    find_profile: (userId) => {
+        find_profile: (userId) => {
         return new Promise(async (resolve, reject) => {
             var profile = await db.get().collection(collections.USER_DATA).findOne({ userid: new objectId(userId) })
             resolve(profile)
@@ -485,8 +481,41 @@ module.exports = {
     },
     delete_from_whishlist: (user, proId) => {
         return new Promise((resolve, reject) => {
-            db.get().collection(collections.WHISHLIST_COLLECTION).updateOne({ userId: new ObjectId(user) }, { $pull: { 'products': { item: new ObjectId(proId) } } }).then((response) => {
+            db.get().collection(collections.WHISHLIST_COLLECTION).updateOne({ userId: user }, { $pull: { 'products': { item: new ObjectId(proId) } } }).then((response) => {
                 resolve(response)
+            })
+        })
+    },
+    check_user:(userdata)=>{
+        return  new Promise((resolve,reject)=>{
+            db.get().collection(collections.USER_COLLECTION).findOne({ email: userdata.email }).then((response) => {
+                if (response) {
+                    resolve({ err: "user already exist" })
+                }else{
+                    resolve(false)
+                }
+            })
+        })
+    },
+    check_email:(email)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.USER_COLLECTION).findOne({ email:email }).then((response)=>{
+                if (response) {
+                    resolve(true)
+                }else{
+                    resolve(false)
+                }
+            })
+        })
+    },
+    update_password:(email,password)=>{
+        return new Promise(async(resolve,reject)=>{
+            var b_password=await bcrypt.hash(password,10)
+            db.get().collection(collections.USER_COLLECTION).updateOne({email:email},{$set:{password:b_password}}).then((response)=>{
+                db.get().collection(collections.USER_COLLECTION).findOne({email:email}).then((data)=>{
+                    resolve(data)
+                })
+            
             })
         })
     }
