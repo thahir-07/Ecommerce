@@ -327,7 +327,7 @@ module.exports = {
                 {
                     $match: {
                         $or: [
-                            { subCategory: category1 },
+                            { productCategory: category1 },
                             { subCategory: category2 }]
                     }
                 }, {

@@ -30,10 +30,14 @@
 .search-box:focus{
   width :90% !important;
 }
-.whish-focus::after .whish-btn{
-  background-color: blueviolet;
-  border-radius: 50%;
-  padding: 10px;
+.whish-focus{
+  transition: all 0.2s ease;
+}
+.whish-focus:is(:active,:hover){
+  background-color:rgba(242, 255, 0, 0.765);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  border-radius: 5px;
+  padding: 3px;
 }
 
 
@@ -106,12 +110,12 @@
 
 </section>
 <section style="padding-top: 0;">
-  <div class="container-fluid text-center" >
+  <div class="container-fluid text-center">
      <img src="/project-images/ad1.jpg" id="ad-img" width="100%" height="300" alt="Image not found">
     
-      <input type="radio" name="slide" class="slide" id="img1">
-      <input type="radio" name="slide" class="slide" id="img2">
-      <input type="radio" name="slide" class="slide" id="img3">
+      <label for="img1"></label> <input type="radio" name="slide" class="slide" id="img1">
+      <label for="img2"></label><input type="radio" name="slide" class="slide" id="img2">
+      <label for="img3"></label><input type="radio" name="slide" class="slide" id="img3">
   </div>
 </section>
 
@@ -136,7 +140,7 @@
             <div class="mb">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span class="average">{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
              <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}',{{user}})"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}} whish-focus">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -168,7 +172,7 @@
             <div class="mb">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span class="average">{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
              <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}',{{user}})"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}} whish-focus">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -200,10 +204,10 @@
               <p class="card-text" style=";"><span class="amt">{{this.productData.price}}</span></p>
             </div>
         </a>
-            <div class="mb">
+             <div class="mb">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span class="average">{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
              <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}',{{user}})"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}} whish-focus">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -223,18 +227,16 @@
           <div class="card border border-shadow card-outer" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
             <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
-            <p class="card-text">{{this.productData.name}}</p>
-            <div class="card-body pt-0" style="line-height: 3px;">
+            <div class="pt-0 description-text" style="display: block;overflow: hidden;height: 60px;">
+            <p class="card-text">{{this.productData.name}}</p></div>
+            <div class="card-body p-0" style="line-height: 10px;">
               <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
-            </div>
-            <div class="pt-0 description-text" style="display: block;overflow: break-word;height: 20px;">
-              <p class="card-text mt-0">{{this.productData.description}}</p>
             </div>
         </a>
             <div class="mb-1 ">
               <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
              <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}','{{user}}')"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
+                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}} whish-focus">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -288,7 +290,7 @@
 <script>
 
 //ad section
-  var i=0
+  let i=0
   document.getElementById('img1').checked=true
   var images=['/project-images/ad2.jpg','/project-images/ad3.jpg']
   var cur=document.getElementById('ad-img').src
@@ -316,6 +318,9 @@
   document.getElementById('img3').addEventListener('change',()=>{
     document.getElementById('ad-img').src=images[1]
 
+  })
+  document.getElementById('img3').addEventListener('error',(err)=>{
+    console.log(err)
   })
 
 </script>

@@ -28,16 +28,67 @@
     h1{
         font-style: italic;
     }
-</style>
-</head>
+      .cont {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
 
+.cart {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.cart h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+
+.empty-cart-message {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+}
+
+.empty-cart-message p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.empty-cart-message a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.empty-cart-message a:hover {
+    background-color: #0056b3;
+}
+</style>
+{{#if products}}
 <body>
-    <div class="container">
-        <h1 class="pb-3 cl">Ordered Products</h1>
+    <div class="container-fluid p-1">
+        <h1 class="pb-3 p-0">Ordered Products</h1>
         <div class="row">
             {{#each products}}
             {{#if this}}
-            <div class="product-card text-center">
+            <div class="product-card text-center p-0 pt-2">
                 {{#each this}}
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -66,6 +117,22 @@
 
         </div>
     </div>
+{{else}}
+
+<div class="cont">
+ <div class="cart">
+       
+        <div class="cart-items">
+            <!-- You can put your cart items here dynamically -->
+        </div>
+        <div class="empty-cart-message">
+            <p>Oops! No Orders Yet</p>
+            <a href="/" class="button">Start Exploring</a>
+        </div>
+    </div>
+    </div>
+{{/if}}
+
     <script>
          function formatIndianAmountInINR(amount) {
   const formatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });

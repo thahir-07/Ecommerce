@@ -42,7 +42,7 @@
     }
     .change_pass_inp:focus{
         outline: none;
-        border: 2px solid #42b949;
+        border: 3px solid  rgb(0, 255, 123);
     }
 </style>
 <section class="mb-5" style="margin-top: 70px;padding-bottom: 40px;">
@@ -109,7 +109,7 @@
         </div>
         <div>
             <span id="res_login">Resend otp in: 00:</span><span id="timer_login">30</span><span class="btn"
-                type="button" id="resend_login" onclick="resend_otp()"
+                type="button" id="resend_login" onclick="resend_otp_login()"
                 style="text-decoration: underline;color: blue;border: none;"></span>
         </div>
         <button type="submit" class="btn btn-primary button m-2">Verify OTP</button>
@@ -140,7 +140,9 @@
         </form>
     </div>
 </div>
-
+ <div id="cus-alert3" class="custom-alert">
+        <p>Password changed successfully.</p>
+    </div>
 <script>
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();

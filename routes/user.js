@@ -432,23 +432,23 @@ router.post('/search', async (req, res) => {
 
 
 router.get('/mobiles-tablets', async (req, res) => {
-  var product = await userHelpers.filter_products(req.session.user, 'Smartphones', 'Tablet')
+  var product = await userHelpers.filter_products(req.session.user, 'Smartphones', 'Smartphones')
   res.render('user/mobiles-tablets', { product, admin: false, user:req.session.user, cartItemCount:req.session.cartItemCount })
 })
 router.get('/electronics', async (req, res) => {
-  var product = await userHelpers.filter_products(req.session.user, 'Electronic', 'Electronics')
+  var product = await userHelpers.filter_products(req.session.user, 'Electronics', 'Electronics')
   res.render('user/electronics', { product, admin: false,  user:req.session.user, cartItemCount:req.session.cartItemCount })
 })
 router.get('/tv-appliances', async (req, res) => {
-  var product = await userHelpers.filter_products(req.session.user, 'tv', 'appliances')
+  var product = await userHelpers.filter_products(req.session.user, 'Electrical', 'appliances')
   res.render('user/tv-appliances', { product, admin: false, user:req.session.user, cartItemCount:req.session.cartItemCount })
 })
 router.get('/fashion', async (req, res) => {
-  var product = await userHelpers.filter_products(user, 'fashion', 'cloths')
+  var product = await userHelpers.filter_products(req.session.user ,'Fashion', 'cloths')
   res.render('user/fashion', { product, admin: false,  user:req.session.user, cartItemCount:req.session.cartItemCount })
 })
 router.get('/beuty', async (req, res) => {
-  var product = await userHelpers.filter_products(req.session.user,'beuty', 'cosmetics')
+  var product = await userHelpers.filter_products(req.session.user,'Beauty and Personal Care', '')
   res.render('user/beuty', { product, admin: false,  user:req.session.user, cartItemCount:req.session.cartItemCount })
 })
 router.get('/home-appliances', async (req, res) => {

@@ -154,7 +154,7 @@
                  <div class="col-12 " style="border: 1px solid grey; padding: 10px;margin: 2px; border-radius: 5px;">
                     <h4>Product Details</h4>
                     <div id="features" class="desc"></div>
-                    <button onclick="change()" style="color: blue;">show more</button>
+                    <button id="toggle_btn" onclick="change()" style="color: blue;">show more</button>
                 </div>
                 {{#if proRating}}
                 <div class="row" style="border: 1px solid grey; padding: 10px;margin: 2px; border-radius: 5px;">
@@ -270,6 +270,12 @@
     }
 function change(){
     document.getElementById('features').classList.toggle('desc')
+    if(document.getElementById('features').classList.contains('desc')){
+        document.getElementById('toggle_btn').textContent="Show more"
+    }else{
+         document.getElementById('toggle_btn').textContent="Show less"
+    }
+
 }
 var show=(id)=>{
   var review_image=document.getElementById(id).src

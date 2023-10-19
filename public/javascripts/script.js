@@ -1,16 +1,18 @@
-
-if (window.innerWidth <= 768) {
-    document.getElementById('search-lap').style.display = 'none'
-} else {
-    document.getElementById('smartphone').style.display = 'none'
-}
-window.addEventListener('resize', () => {
+window.addEventListener('DOMContentLoaded',()=>{
     if (window.innerWidth <= 768) {
         document.getElementById('search-lap').style.display = 'none'
     } else {
         document.getElementById('smartphone').style.display = 'none'
     }
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768) {
+            document.getElementById('search-lap').style.display = 'none'
+        } else {
+            document.getElementById('smartphone').style.display = 'none'
+        }
+    })
 })
+
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
         location.reload()
@@ -418,11 +420,41 @@ $('#reset_password').submit((e)=>{
             data:$('#reset_password').serialize(),
             method:'post',
             success:(response)=>{
-                alert("password changed successfully")
-                location.href='/'
+                document.getElementById("cus-alert3").style.display='block'
+                setTimeout(()=>{
+                    location.href='/'
+                },1000)
+                
             }
         })
     }else{
         document.getElementById('err-password').textContent='Mismatch confirmation password'
     }
 })
+function resend_otp_login(){
+    document.getElementById('err-otp_login').textContent=""
+    $.ajax({
+        url:'/sendOtp',
+        method:"GET",
+        success:(response)=>{
+            var time = 30
+            var timer = document.getElementById('timer_login')
+            function countdown(){
+                time -= 1
+                timer.textContent = time
+                if(time===0){
+                    clearInterval(interval)
+                    timer.textContent=""
+                    document.getElementById("res_login").textContent=""
+                    document.getElementById("resend_login").textContent="Resend"
+                }else{
+                    document.getElementById("res_login").textContent="Resend otp in: 00:"
+                    document.getElementById("resend_login").textContent=""
+                }
+                    
+            }
+            var interval=setInterval(countdown, 1000)
+        }
+
+    })
+}
