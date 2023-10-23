@@ -1,9 +1,9 @@
 <style>
     #main-img{
-        width:  260px ;
-        height: 350px ;
-        border: 1px solid;
-        border-radius: 10px;
+       width: 90%;
+       height: 350px;   
+       border: 1px solid grey;  
+        
     }
     .container{
         margin-top: 100px;
@@ -13,13 +13,9 @@
         height: 70px;
         margin: 2px;
         margin-left: 5px;
-        border-radius: 10px;
-        border: 1px solid;
-    }
-    .img-container{
-        margin: 2px ;
         
     }
+
     .focus{
         border: 2px solid rgb(23, 54, 64) !important;
     }
@@ -66,49 +62,50 @@
     }
     .size-border{
         border: 2px solid rgba(208, 178, 12, 0.84) !important;
-        border-radius: 5px;
+        
     }.size-div{
         display: flex;
         flex-direction: row;
     }
 </style>
-<div class="container pt-2">
+<div class="container pt-0">
     <div class="row ">
-        <div class=" col-3 col-lg-2 ">
+        <div class=" col-2 col-lg-2 p-0 text-center ">
+           
             <div class="row ">       
                         <button onclick="changeImage('{{id}}','1')" onpointerover="changeImage('{{id}}','1')">
-                        <img class="img focus" id="img1" src="/product-image/{{id}}.jpg" alt="">
+                        <img class="img focus" id="img1" src="/product-image/{{id}}.jpg" alt="" style="object-fit: contain;border: 1px solid grey;">
                         </button>   
                     
             </div>
             <div class="row">
                 
                     <button onclick="changeImage('{{id}}','2')" onpointerover="changeImage('{{id}}','2')">
-                        <img class="img" id="img2" src="/product-image/{{id}}2.jpg" alt="">
+                        <img class="img" id="img2" src="/product-image/{{id}}2.jpg" alt="" style="object-fit: contain;border: 1px solid grey;">
                     </button>    
                 
             </div>
             <div class="row">
                
                     <button onclick="changeImage('{{id}}','3')" onpointerover="changeImage('{{id}}','3')">
-                    <img class="img " id="img3" src="/product-image/{{id}}3.jpg" alt="">
+                    <img class="img " id="img3" src="/product-image/{{id}}3.jpg" alt="" style="object-fit: contain;border: 1px solid grey;">
                     </button>   
                     
             </div>
             <div class="row">
                
                     <button onclick="changeImage('{{id}}','4')" onpointerover="changeImage('{{id}}','4')">
-                        <img class="img " id="img4" src="/product-image/{{id}}4.jpg" alt="">
+                        <img class="img " id="img4" src="/product-image/{{id}}4.jpg" alt="" style="object-fit: contain;border: 1px solid grey;">
                     </button>
                  
             </div>
         
          
-                 
+              
             
         </div>
-        <div class="imgContainer  col-7  col-lg-5  ">
-            <img id="main-img" src="/product-image/{{id}}.jpg" alt="">
+        <div class="imgContainer col-10  col-lg text-center" >
+            <img id="main-img" src="/product-image/{{id}}.jpg" alt="" style="object-fit: contain;">
              <div class="row text-center mt-3">
                 {{#if product.size}}
                     <button class="btn button" onclick="addToCart('{{id}}','{{user.id}}',true)"
@@ -126,7 +123,7 @@
         
         <div class="col-12  col-lg-5">
             <div class="row text-center m-1" >  
-                <div class="col-12" style="border: 1px solid; padding: 10px;margin: 2px; margin-bottom: 10px; border-radius: 5px;margin-top: 10px;">
+                <div class="col-12" style="border: 1px solid grey; padding: 10px;margin: 0px; margin-bottom: 10px;">
                 <h3>{{product.name}}</h3>
                 <p class="text-left" style="align-content: start;">Price: <span class="amt"> {{product.price}}</span></p>
                 <div class="bg-color" style="color: rgb(255, 255, 255);font-size: larger; width: 60px;border-radius: 5px;margin-left: auto;margin-right: auto;" >{{#if proRating}}{{#total_rating proRating}}{{this}}{{/total_rating}}{{else}}5.0{{/if}}  &#9733;</div>
@@ -134,30 +131,30 @@
             </div>
              {{#if product.size}}
            <div class="row m-1" >
-                <div class="col-12  "  style="border: 1px solid; padding: 10px;margin: 2px; border-radius: 5px;">
+                <div class="col-12  "  style="border: 1px solid grey; padding: 10px;margin: 2px;">
                 <h5>Select Size</h5>
                 <div class="size-div">
                 {{#each product.size}}
-               <div class="size" style=" border-radius: 1px;border: 1px solid grey;margin:10px;width:50px;">{{this}}</div>
+               <div class="size" style=" border: 1px solid grey;margin:10px;width:50px;">{{this}}</div>
                {{/each}}
                 </div>
                 </div>
             </div>
             {{/if}}
             <div class="row m-1">
-                <div class="col-12 " style="border: 1px solid; padding: 10px;margin: 2px; border-radius: 5px;">
+                <div class="col-12 " style="border: 1px solid grey; padding: 10px;margin: 2px;">
                     <h4>Description</h4>
                    <div id="overview"></div>
                 </div>
             </div>
             <div class="row mb-3 m-1">
-                 <div class="col-12 " style="border: 1px solid grey; padding: 10px;margin: 2px; border-radius: 5px;">
+                 <div class="col-12 " style="border: 1px solid grey; padding: 10px;margin: 2px;">
                     <h4>Product Details</h4>
-                    <div id="features" class="desc"></div>
+                    <div id="features" class="desc" style="overflow-x:hidden;"></div>
                     <button id="toggle_btn" onclick="change()" style="color: blue;">show more</button>
                 </div>
                 {{#if proRating}}
-                <div class="row" style="border: 1px solid grey; padding: 10px;margin: 2px; border-radius: 5px;">
+                <div class="row" style="border: 1px solid grey; padding: 10px;margin: 2px;">
                     <div class="col-8">
                     <h4 style="display: inline;">Rating & Reviews</h4> </div>
                     <div class="col-4 mb-3 "> <div class="bg-color" style="color: rgb(255, 255, 255);font-size: larger;width:fit-content;border-radius: 5px;" ><span class="m-2">{{#if proRating}}{{#total_rating proRating}}{{this}}{{/total_rating}}{{else}}5.0{{/if}} &#9733; </span></div></div>
@@ -172,7 +169,7 @@
                         <div >{{this.review}}</div>
                         <div class="mt-2 scrolling-wrapper" id="wrapper">
                             {{#each this.images}}
-                        <img style="width: 80px;height: 80px;"id="{{this}}" src="/rating-images/{{this}}.jpg" onclick="show('{{this}}')">
+                        <img style="width: 70px;height: 80px;object-fit: contain;border: 1px solid grey;"id="{{this}}" src="/rating-images/{{this}}.jpg" onclick="show('{{this}}')">
                        
                         {{/each}}
                        </div>
@@ -191,28 +188,26 @@
     
 </div>
 {{#if same}}
-<section class="section-border pb-3 mt-3">
+<section class="section-border pb-1 mt-3">
   <div class="container-fluid ">
     <h3>Similar Products </h3>
      <div class="row text-center">
           {{#each same}}
-       <div class="col-6 col-md-2 p-0" >
-        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
-          <div class="card border border-shadow card-outer" >
+       <div class="col-6 col-md-2 col-m-3 p-0" >
+        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0;">
+          <div class="card border border-shadow card-outer" style="border-radius: 0;">
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
-            <p class="card-text">{{this.productData.name}}</p>
-            <div class="card-body pt-0" style="line-height: 3px;">
-              <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
-            </div>
-            <div class="pt-0 description-text" style="display: block;overflow: break-word;height: 20px;">
-              <p class="card-text mt-0">{{this.productData.description}}</p>
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em;object-fit: contain;" alt="">
+            <div style="height:30px;overflow: hidden;">
+            <p class="card-text" style="line-height: 30px;">{{this.productData.name}}</p></div>
+            <div class="card-body pt-0" style="height:30px;overflow: hidden;">
+              <span class="card-text"><span class="amt" style="line-height: 3px;margin-bottom: 0;"> {{this.productData.price}}</span></span>
             </div>
         </a>
-            <div class="mb-1 ">
-              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline;padding: 0;" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
-             <div class="p-0 " style="display: inline;"> <button class="btn  mb-1" onclick="addToWhishlist('{{this.productData._id}}','{{user}}')"
-                style="color: rgb(255, 255, 255);padding: 3px;font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
+            <div >
+              <div style="color: rgb(9, 128, 104);font-size:18px;width:fit-content;display: inline" ><span >{{#if this.averageRating }}{{this.averageRating}}{{else}}5.0{{/if}} &#9733; </span></div>
+             <div class="p-0 " style="display: inline;"> <button class="btn p-0" onclick="addToWhishlist('{{this.productData._id}}','{{user}}')"
+                style="color: rgb(255, 255, 255);font-size: 13px;" ><span style="font-size:20px;" id="whishlist{{this.productData._id}}" class="whishlist{{this.productData._id}}">{{#if this.whish}}❤️{{else}}🤍{{/if}}</span></button></div></div>
           </div>
         </div>
       </div>
@@ -228,17 +223,58 @@
         <div class="cross1"></div>
         <div class="cross2"></div>
     </button>
-    <img src="" id="view" alt=""  style="margin-top:200px">
+    <div style="width: 100%;height: 100%;display: flex; align-items: center;justify-content: center;margin: 0;scrollbar-color: yellow ;">
+    <img src="" id="view" alt=""  style="object-fit: contain;">
+    </div>
   </div>
   
   
-    <div class="cus-alert" id="cus-alert">
+    <div class="cus-alert" id="cus-alert" style="background-color: rgb(255, 0, 0);">
       please select your size
     </div>
 
      <div id="cus-alert2" class="custom-alert">
         <p>Item added to cart!</p>
     </div>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2023 Flashcart. All rights reserved.</p>
+            <p>Website: <a href="https://www.flashcart.com">www.flashcart.com</a></p>
+            <p>Unauthorized copying, reproduction, or distribution of any content on this website, including text, images, graphics, and code, is strictly prohibited. This includes both electronic and print forms. For permissions and inquiries regarding content use, please contact us at <a href="mailto:legal@flashcart.com">legal@flashcart.com</a>.</p>
+            <p>Unless otherwise indicated, all trademarks, logos, and other intellectual property displayed on this website are the property of Flashcart and are protected under intellectual property laws.</p>
+            <p>By accessing and using this website, you agree to comply with all applicable copyright and intellectual property laws. You may not use, modify, or distribute the content of this website for commercial purposes without express written consent from Flashcart.</p>
+            <p>Your use of this website does not grant you any rights or licenses in relation to the intellectual property rights or the content presented herein. All content on this website is provided for informational purposes and does not constitute professional advice.</p>
+            <p>Flashcart reserves the right to take legal action against any unauthorized use of its copyrighted content or intellectual property.</p>
+            <p>For more information about our terms of use and privacy practices, please visit our <a href="/terms-of-use">Terms of Use</a> and <a href="/privacy-policy">Privacy Policy</a> pages linked at the bottom of this website.</p>
+            <p>For copyright inquiries, please contact:</p>
+            <address>
+                Legal Department<br>
+                Flashcart<br>
+                123 Main Street<br>
+                City, State, ZIP<br>
+                Email: <a href="mailto:legal@flashcart.com">legal@flashcart.com</a><br>
+                Phone: (123) 456-7890
+            </address>
+        </div>
+    </footer>
+    <footer class="bg-dark text-light pb-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3>Contact the Developer</h3>
+                <!-- Social Media Icons -->
+                <div class="">
+                    <a href="whatsapp://send?phone=+918277906114" class="text-light me-3"><i class="fab fa-whatsapp"><img src="/project-images/whatsapp.png" style="height: 20px;width: 20px;" alt=""></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-twitter"><img src="/project-images/facebook.png" style="height: 20px;width: 20px;" alt=""></i></a>
+                    <a href="https://www.instagram.com/_thahir__07/" class="text-light me-3"><i class="fab fa-instagram"><img src="/project-images/instagram.png" style="height: 20px;width: 20px;" alt=""></i></a>
+                    <a href="https://www.linkedin.com/in/abu-thahir-609a96194/" class="text-light me-3"><i class="fab fa-linkedin"></i><img src="/project-images/linkedin.png" style="height: 20px;width: 20px;" alt=""></a>
+                    <a href="https://thahir-07.github.io/thahir-s-personal-website/" class="text-light"><i class="fab round corner"></i><img src="/project-images/admin.jpg" style="height: 20px;width: 20px; border-radius: 10px;" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script>
      var description=`{{product.description}}`

@@ -1,5 +1,3 @@
-
-
 <div class="container bg-green pb-5">
     <div class="view-account ">
         <section class="module ">
@@ -7,51 +5,59 @@
                 <div class="side-bar sb">
                     <div class="user-info text-center">
                         {{#if google}}
-                            <img class="img-profile rounded-circle img-responsive center-block profile-img mt-4 profile_img_change" src={{gProfile.photo}} alt="image not found">
+                        <img class="img-profile rounded-circle img-responsive center-block profile-img mt-4"
+                            src={{gProfile.photo}} alt="image not found">
                         {{else}}
-                        <img class="img-profile rounded-circle img-responsive center-block profile-img mt-4 profile_img_change" src="/user-image/{{profile.userid}}.jpg" >
+                        <img class="img-profile rounded-circle img-responsive center-block profile-img mt-4 profile_change" id="profile_img"
+                            src="/user-image/{{profile.userid}}.jpg">
                         {{/if}}
                         <ul class="meta list list-unstyled">
-                            <li><h3>{{user.name}}</h3> </li>
-                            
-                           
+                            <li>
+                                <h3>{{user.name}}</h3>
+                            </li>
+
+
                         </ul>
                     </div>
-            		<nav class="side-menu">
-        				<ul class="nav">
-        					<li class="active"><a href="#"><span class="fa fa-user"></span> Profile</a></li>
-        					<li><a href="#"><span class="fa fa-cog"></span> Settings</a></li>
-        					<li><a href="#"><span class="fa fa-credit-card"></span> Billing</a></li>
-        				</ul>
-        			</nav>
+                    <nav class="side-menu">
+                        <ul class="nav">
+                            <li class="active"><a href="#"><span class="fa fa-user"></span> Profile</a></li>
+                            <li><a href="#"><span class="fa fa-cog"></span> Settings</a></li>
+                            <li><a href="#"><span class="fa fa-credit-card"></span> Billing</a></li>
+                        </ul>
+                    </nav>
                 </div>
                 <div class="content-panel">
                     <h2 class="title">Profile</h2>
-                    <form class="form-horizontal" action="/update-profile" enctype="multipart/form-data"  method="post">
+                    <form class="form-horizontal" action="/update-profile" enctype="multipart/form-data" method="post">
                         <fieldset class="fieldset">
                             <h3 class="fieldset-title">Personal Info</h3>
                             <div class="form-group avatar">
                                 <figure class="figure col-md-2 col-sm-3 col-xs-12">
                                     {{#if google}}
-                                    <img class="rounded-circle img-responsive profile_img_change" src={{gProfile.photo}} alt="Profile">
+                                    <img class="rounded-circle img-responsive" src={{gProfile.photo}} alt="Profile">
                                     {{else}}
-                                    <img class="rounded-circle img-responsive profile_img_change"  src="/user-image/{{profile.userid}}.jpg" alt="Profile">
+                                    <img class="rounded-circle img-responsive profile_change" id="profile_img_change"
+                                        src="/user-image/{{profile.userid}}.jpg" alt="Profile">
                                     {{/if}}
                                 </figure>
                                 <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                                    <input type="file" width="20px" class="file-uploader pull-left mb-3" id="image" name="image" onchange="profile_image_changed(event)">
-                                    <input type="submit" width="10px" class="btn btn-info text-white btn-default-alt pull-left" value="update image"><br><br>
+                                    <input type="file" width="20px" class="file-uploader pull-left mb-3" id="image"
+                                        name="image" onchange="profile_image_changed(event)">
+                                    <input type="submit" width="10px"
+                                        class="btn btn-info text-white btn-default-alt pull-left"
+                                        value="update image"><br><br>
                                 </div>
                             </div>
                             <div class="form-group"><br><br>
-                               <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
+                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
                                     <input type="text" class="form-control" name="fname" value="{{profile.fname}}">
                                 </div>
                             </div>
-        
+
                             <div class="form-group">
-                                 <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
+                                <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
                                     <input type="text" class="form-control" name="lname" value="{{profile.lname}}">
                                 </div>
@@ -59,24 +65,24 @@
                             <div class="form-group">
                                 <label class="col-md-2 col-sm-3 col-xs-12 control-label"></label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                {{#if profile}}
+                                    {{#if profile}}
                                     {{#if male}}
-                                    <label for="Male">Male</label >
-                                    <input type="radio" name="gender"  value="Male" checked >
-                                    <label for="Male">Female</label>
-                                     <input type="radio" name="gender" value="Female">
-                                    {{else}}
-                                     <label for="Male">Male</label >
-                                     <input type="radio" name="gender"  value="Male">
-                                    <label for="Male">Female</label>
-                                     <input type="radio" name="gender" value="Female" checked>
-                                    {{/if}}
-                                {{else}}
-                                    <label for="Male">Male</label >
-                                    <input type="radio" name="gender"  value="Male">
+                                    <label for="Male">Male</label>
+                                    <input type="radio" name="gender" value="Male" checked>
                                     <label for="Male">Female</label>
                                     <input type="radio" name="gender" value="Female">
-                                {{/if}}
+                                    {{else}}
+                                    <label for="Male">Male</label>
+                                    <input type="radio" name="gender" value="Male">
+                                    <label for="Male">Female</label>
+                                    <input type="radio" name="gender" value="Female" checked>
+                                    {{/if}}
+                                    {{else}}
+                                    <label for="Male">Male</label>
+                                    <input type="radio" name="gender" value="Male">
+                                    <label for="Male">Female</label>
+                                    <input type="radio" name="gender" value="Female">
+                                    {{/if}}
 
 
 
@@ -85,60 +91,65 @@
                         </fieldset>
                         <fieldset class="fieldset">
                             <h3 class="fieldset-title strong mt-4">Contact Info</h3>
-                           
+
                             <div class="form-group">
                                 <label class="col-md-2  col-sm-3 col-xs-12 control-label">Locality</label>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name="locality" value="{{profile.locality}}">
-            
+                                    <input type="text" class="form-control" name="locality"
+                                        value="{{profile.locality}}">
+
                                 </div>
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Pincode</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="number" class="form-control" name="pincode" value="{{profile.pincode}}">
-            
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Pincode</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="number" class="form-control" name="pincode"
+                                            value="{{profile.pincode}}">
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-6  col-sm-3 col-xs-12 mb-1 ">Address(Area and Street)</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <textarea type="text" class="form-control" name="area-street" >{{profile.area_street}}</textarea>
-            
+                                <div class="form-group">
+                                    <label class="col-md-6  col-sm-3 col-xs-12 mb-1 ">Address(Area and Street)</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <textarea type="text" class="form-control"
+                                            name="area-street">{{profile.area_street}}</textarea>
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">City/District/Town</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name="city-district" value="{{profile.city_district}}">
-            
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">City/District/Town</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" name="city-district"
+                                            value="{{profile.city_district}}">
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">State</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" name="state" value="{{profile.state}}">
-            
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">State</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" name="state" value="{{profile.state}}">
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Mobile Number</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="tel" class="form-control" name="number" value="{{profile.number}}">
-                
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Mobile Number</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="tel" class="form-control" name="number" value="{{profile.number}}">
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
-                                <div class="col-md-10 col-sm-9 col-xs-12">
-                                    <input type="email" class="form-control" name="email" value="{{profile.email}}">
-                                    
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="email" class="form-control" name="email" value="{{profile.email}}">
+
+                                    </div>
                                 </div>
-                            </div>
                         </fieldset>
                         <hr>
                         <div class="form-group">
-                            <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0 text-center">
-                                <input type="submit" class="btn btn-primary" value="update" >
+                            <div
+                                class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0 text-center">
+                                <input type="submit" class="btn btn-primary" value="update">
                             </div>
                         </div>
                     </form>
@@ -147,24 +158,24 @@
         </section>
     </div>
 </div>
+
 <script>
-    function profile_image_changed(event){
+    function profile_image_changed(event) {
         console.log(event)
-        document.getElementById('profile_img_change').src=URL.createObjectURL(event.target.files[0])
+        document.getElementById('profile_img_change').src = URL.createObjectURL(event.target.files[0])
     }
-    var img=document.getElementsByClassName('profile_img_change')
-    for(var i in img){
-        img[i].addEventListener('error',()=>{
+    document.getElementById('profile_img_change').addEventListener("error",()=>{
         document.getElementById('profile_img_change').src='/project-images/user.jpg'
     })
+    document.getElementById('profile_img').addEventListener("error",()=>{
+        document.getElementById('profile_img').src='/project-images/user.jpg'
+    })
+    if (window.innerWidth <= 768) {
+        var images = document.getElementsByClassName('profile-img')
+        for (i of images) {
+            console.log(i)
+            i.style.width = '200px'
+            i.style.height = '200px'
+        }
     }
-var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-if (screenWidth <= 768) {
-   var images=document.getElementsByClassName('profile-img')
-   for(i of images){
-    console.log(i)
-    i.style.width='200px'
-    i.style.height='200px'
-   }
-}
 </script>

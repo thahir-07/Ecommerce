@@ -347,9 +347,17 @@ function resend_otp(){
 function forgot_password(){
    var log_inp= document.getElementById('log_email_inp').value
    if(log_inp==''){
-    alert('Please enter your email to reset password!')
+    document.getElementById('email_null').style.top='50%'
+    var c=setTimeout(()=>{
+        document.getElementById('email_null').style.top='150%'
+    },1500)
+    
    }else if(!log_inp.includes('@')){
-    alert("Enter correct email")
+    document.getElementById('msg_email').textContent="Please enter valid email id !"
+    document.getElementById('email_null').style.top='50%'
+    var c=setTimeout(()=>{
+        document.getElementById('email_null').style.top='150%'
+    },1500)
    }else{
     $.ajax({
         url:'/check-email',
@@ -458,3 +466,4 @@ function resend_otp_login(){
 
     })
 }
+

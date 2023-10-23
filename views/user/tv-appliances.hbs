@@ -5,7 +5,7 @@
         {{#each product}}
         <div class="col-6 col-md-4 col-lg-2 mt-3 text-center fixed " >
           <div class="card  border-shadow "style="">
-            <img src="/product-image/{{this._id}}.jpg" class="card-img-top" style="height:13em" alt="">
+            <img src="/product-image/{{this._id}}.jpg" class="card-img-top" style="height:13em;object-fit: contain;" alt="">
             <p class="card-text">{{this.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
               <p class="card-text">Rs.{{this.price}}/-</p></div>

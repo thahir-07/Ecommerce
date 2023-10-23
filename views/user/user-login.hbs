@@ -34,15 +34,33 @@
         padding: 10PX;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    .change_pass_inp{
-         text-align: center;
+
+    .change_pass_inp {
+        text-align: center;
         margin: 2px;
         border: 2px solid #000000;
         border-radius: 5px;
+        width:80%
     }
-    .change_pass_inp:focus{
+
+    .change_pass_inp:focus {
         outline: none;
-        border: 3px solid  rgb(0, 255, 123);
+        border: 3px solid rgba(0, 119, 255, 0.335);
+        
+    }
+
+    .confirm {
+        display: block;
+        position: fixed;
+        top: 0%;
+        left: 50%;
+        width: max-content;
+        transform: translate(-50%, -70%);
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 5px;
+        transition: top 0.5s ease-out;
     }
 </style>
 <section class="mb-5" style="margin-top: 70px;padding-bottom: 40px;">
@@ -70,7 +88,7 @@
                                 style="height: 40px !important; width: 100%;" type="submit" role="button" value="login">
                         </div>
                         <a onclick="forgot_password()"
-                            style="text-decoration: underline;color: rgb(30, 48, 239);">forgot password?</a>
+                            style="text-decoration: underline;color: rgb(30, 48, 239);cursor:pointer">forgot password?</a>
                         <hr>
                         <div class="pt-2" style="margin-left: auto; width: 100%;">
                             <a href="/auth/google" class=""
@@ -93,7 +111,7 @@
         <p>Please enter the 4-digit OTP sent to your email address.</p>
 
         <div class="form-group">
-            <form  id="otp-form_login">
+            <form id="otp-form_login">
                 <input type="password" class="otp-input" id="otp1_login" name="otp1" maxlength="1" required
                     inputmode="numeric">
                 <input type="password" class="otp-input" id="otp2_login" name="otp2" maxlength="1" required
@@ -125,9 +143,9 @@
 
         <div class="form-group">
             <form action="" id="reset_password">
-                <input type="password" class="change_pass_inp" id="password_change" name="password"  required
+                <input type="password" class="change_pass_inp" id="password_change" name="password" required
                     placeholder="password">
-                <input type="password" class="change_pass_inp" id="c_password_change" name="c_password"  required
+                <input type="password" class="change_pass_inp" id="c_password_change" name="c_password" required
                     placeholder="confirmation password">
 
 
@@ -140,10 +158,15 @@
         </form>
     </div>
 </div>
- <div id="cus-alert3" class="custom-alert">
-        <p>Password changed successfully.</p>
-    </div>
+<div id="cus-alert3" class="custom-alert">
+    <p>Password changed successfully.</p>
+</div>
+
+<div id="email_null" class="confirm text-center bg-color text-white">
+    <p id="msg_email">Please Enter your Email to reset password ! </p>
+</div>
 <script>
+
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.

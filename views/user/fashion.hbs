@@ -5,16 +5,13 @@
     
       {{#each product}}
        <div class="col-6 col-md-2 p-0" >
-        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
-          <div class="card border border-shadow card-outer" >
+        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0px;">
+          <div class="card border border-shadow card-outer" style="border-radius: 0;">
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
-            <p class="card-text">{{this.productData.name}}</p>
-            <div class="card-body pt-0" style="line-height: 3px;">
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em;object-fit: contain;" alt="">
+            <div style="height:30px;overflow: hidden;"><p class="card-text" style="line-height: 30px;">{{this.productData.name}}</p></div>
+            <div class="card-body pt-0 pb-0" style="">
               <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
-            </div>
-            <div class="pt-0 description-text" style="display: block;overflow: break-word;height: 20px;">
-              <p class="card-text mt-0">{{this.productData.description}}</p>
             </div>
         </a>
             <div class="mb-1 ">

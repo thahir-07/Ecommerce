@@ -39,7 +39,9 @@
   border-radius: 5px;
   padding: 3px;
 }
-
+.card-outer:hover img{
+  transform: scale(4px);
+}
 
 </style>
 
@@ -127,10 +129,10 @@
       {{#product_check this 'Smartphones'}}
        
        <div class="col-4 col-md-2 product" style="padding: 0;">
-        <div class="card-outer m" style="border: .5px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
-          <div class="card border border-shadow card-outer" >
+        <div class="card-outer m" style="border: .5px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0px;">
+          <div class="card border border-shadow card-outer" style="border-radius: 0;" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:8em" alt="">
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top mt-1" style="height:8em;object-fit: contain;" alt="">
             <p class="card-text" >{{this.productData.name}}</p>
             <div class="card-body" style="line-height: 1px;margin: 10px;padding: 0px;">
               <p class="card-text" style=";"><span class="amt">{{this.productData.price}}</span></p>
@@ -159,10 +161,10 @@
       {{#each product}}
       {{#product_check this 'Fashion'}}
        <div class="col-4 col-md-2 product" style="padding: 0;">
-        <div class="card-outer m" style="border: .5px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
-          <div class="card border border-shadow card-outer" >
+        <div class="card-outer m" style="border: .5px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0px;">
+          <div class="card border border-shadow card-outer" style="border-radius: 0;" >
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:8em" alt="">
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top mt-1" style="height:8em;object-fit: contain;" alt="">
             <p class="card-text" >{{this.productData.name}}</p>
             <div class="card-body" style="line-height: 1px;margin: 10px;padding: 0px;">
               <p class="card-text" style=";"><span class="amt">{{this.productData.price}}</span></p>
@@ -195,10 +197,10 @@
       {{#each product}}
       {{#product_check this 'Electronics'}}
        <div class="col-4 col-md-2 product" style="padding: 0;">
-        <div class="card-outer m" style="border: .5px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
-          <div class="card border border-shadow card-outer" >
+        <div class="card-outer m" style="border: .5px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0;">
+          <div class="card border border-shadow card-outer" style="border-radius: 0;">
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:8em" alt="">
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top mt-1" style="height:8rem;object-fit: contain;" alt="">
             <p class="card-text" >{{this.productData.name}}</p>
             <div class="card-body" style="line-height: 1px;margin: 10px;padding: 0px;">
               <p class="card-text" style=";"><span class="amt">{{this.productData.price}}</span></p>
@@ -223,13 +225,13 @@
      <div class="row">
           {{#each product}}
        <div class="col-6 col-md-2 p-0" >
-        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 10px;">
-          <div class="card border border-shadow card-outer" >
+        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0;">
+          <div class="card border border-shadow card-outer" style="border-radius: 0;">
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
-            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:12em" alt="">
-            <div class="pt-0 description-text" style="display: block;overflow: hidden;height: 60px;">
+            <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top mt-1" style="height:12em;object-fit: contain;" alt="" >
+            <div class="pt-0 description-text" style="display: block;overflow: hidden;height: 30px;">
             <p class="card-text">{{this.productData.name}}</p></div>
-            <div class="card-body p-0" style="line-height: 10px;">
+            <div class="card-body p-0" style="line-height: 15px;">
               <p class="card-text"><span class="amt">{{this.productData.price}}</span></p>
             </div>
         </a>
