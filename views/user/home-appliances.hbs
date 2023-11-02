@@ -2,9 +2,8 @@
     <div class="container-fluid">
       <div class="row text-center">
         <h2>Home & Appliences</h2>
-        
         {{#each product}}
-        <div class="col-6 col-md-4 col-lg-2 mt-3 text-center fixed " >
+        <div class="col-6 col-md-4 col-lg-2 mt-3 text-center fixed product" >
         <a id="load" href="/detailed-view/{{this._id}}">
           <div class="card  border-shadow "style="">
             <img src="/product-image/{{this._id}}.jpg" class="card-img-top" style="height:13em" alt="">

@@ -38,11 +38,10 @@
     <div class="container-fluid ">
       <div class="row text-center align-item-center">
         {{#each matchedProducts}}
-        
-        <div class="col-6 col-md-2 p-0" >
+        <div class="col-6 col-md-2 p-0 product" >
         <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0px;">
           <div class="card border border-shadow card-outer" style="border-radius: 0;">
-        <a class="load" href="/detailed-view/{{this.productData._id}}" >
+        <a class="load pt-1" href="/detailed-view/{{this.productData._id}}" >
             <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top" style="height:11em;object-fit: contain;" alt="">
             <p class="card-text">{{this.productData.name}}</p>
             <div class="card-body pt-0" style="line-height: 3px;">
@@ -88,4 +87,7 @@ for (const element of amtElements) {
   const formattedTextContent = formatIndianAmountInINR(textContent);
   element.textContent = formattedTextContent;
 }
+ if (window.innerWidth > 990) {
+      document.getElementById('search-lap').style.display = 'block'
+    }
   </script>

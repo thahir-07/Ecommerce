@@ -39,13 +39,14 @@
   border-radius: 5px;
   padding: 3px;
 }
-.card-outer:hover img{
-  transform: scale(4px);
-}
+.product-outer:hover img{
+  transform: scale(1.03);
+  }
+
 
 </style>
 
-<div class="container text-center pt-2" id="smartphone">
+<div class="container text-center pt-2" id="smartphone-search-inp" style="display: none;">
 <form class="d-flex ml-5 text-center" action="/search" method="post" >
         <input class="form-control pt-0 pb-0 search-box" id="search-box" style='width: 70%;height: 40px;border: 1px linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));border-top-right-radius: 0;border-bottom-right-radius: 0;margin-left: auto;' type="search" placeholder="Search" name="search" aria-label="Search">
         <button class="btn btn-outline-success bi-search s-b bg-white" style="background-image: linear-gradient(rgb(26, 193, 120),rgb(187, 0, 255));color: white;width: auto;height: 40px; margin-top: auto;border-top-left-radius: 0;border-bottom-left-radius: 0;margin-right: auto;" type="submit"><img src="/project-images/search.png" style="filter: saturate(50px);" alt="search"></button>
@@ -224,8 +225,8 @@
     <h3>Most Searched</h3>
      <div class="row">
           {{#each product}}
-       <div class="col-6 col-md-2 p-0" >
-        <div class="card-outer mr-0 m-1" style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0;">
+       <div class="col-6 col-md-2 p-0 product-outer" >
+        <div class="card-outer mr-0 m-1 " style="border: 1px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0;">
           <div class="card border border-shadow card-outer" style="border-radius: 0;">
         <a class="load" href="/detailed-view/{{this.productData._id}}" >
             <img src="/product-image/{{this.productData._id}}.jpg" class="card-img-top mt-1" style="height:12em;object-fit: contain;" alt="" >

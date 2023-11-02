@@ -50,14 +50,14 @@ input[type='search']:focus{
 .nav-li{
     text-decoration: none;
     color:rgb(255, 252, 252);
-    margin-right: 10px;
+    margin-right: 5px;
     transition: all 0.2s linear;
 }
 .active,.nav-li:hover{
     padding: 5px;
     padding-top: 5px;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 2px;
     color: black;
     
 }
@@ -815,5 +815,7 @@ body{
 .custom-alert p {
     margin: 0;
 }
-
+input[type="radio"]{
+  cursor: pointer;
+}
 

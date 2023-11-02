@@ -1,17 +1,28 @@
-window.addEventListener('DOMContentLoaded',()=>{
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 990) {
         document.getElementById('search-lap').style.display = 'none'
+        document.getElementById('smartphone-search-inp').style.display = 'block'
     } else {
-        document.getElementById('smartphone').style.display = 'none'
+        document.getElementById('smartphone-search-inp').style.display = 'none'
+        document.getElementById('search-lap').style.display = 'block'
     }
-    window.addEventListener('resize', () => {
-        if (window.innerWidth <= 768) {
+    window.addEventListener('load',()=>{
+        if (window.innerWidth <= 990) {
             document.getElementById('search-lap').style.display = 'none'
+            document.getElementById('smartphone-search-inp').style.display = 'block'
         } else {
-            document.getElementById('smartphone').style.display = 'none'
+            document.getElementById('smartphone-search-inp').style.display = 'none'
+            document.getElementById('search-lap').style.display = 'block'
+        }  
+    })
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 990) {
+            document.getElementById('search-lap').style.display = 'none'
+            document.getElementById('smartphone-search-inp').style.display = 'block'
+        } else {
+            document.getElementById('smartphone-search-inp').style.display = 'none'
+            document.getElementById('search-lap').style.display = 'block'
         }
     })
-})
 
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
