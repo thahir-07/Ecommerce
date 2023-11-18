@@ -349,5 +349,8 @@ for (const element of amtElements) {
   const formattedTextContent = formatIndianAmountInINR(textContent);
   element.textContent = formattedTextContent;
 }
+if (window.innerWidth>=990){
+    document.getElementById('search-lap').style.display = 'block'
+}
 
 </script>

@@ -40,13 +40,13 @@
         margin: 2px;
         border: 2px solid #000000;
         border-radius: 5px;
-        width:80%
+        width: 80%
     }
 
     .change_pass_inp:focus {
         outline: none;
         border: 3px solid rgba(0, 119, 255, 0.335);
-        
+
     }
 
     .confirm {
@@ -61,6 +61,19 @@
         padding: 20px;
         border-radius: 5px;
         transition: top 0.5s ease-out;
+    }
+
+    .conformation {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: max-content;
+        transform: translate(-50%, -70%);
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 5px;
     }
 </style>
 <section class="mb-5" style="margin-top: 70px;padding-bottom: 40px;">
@@ -88,7 +101,8 @@
                                 style="height: 40px !important; width: 100%;" type="submit" role="button" value="login">
                         </div>
                         <a onclick="forgot_password()"
-                            style="text-decoration: underline;color: rgb(30, 48, 239);cursor:pointer">forgot password?</a>
+                            style="text-decoration: underline;color: rgb(30, 48, 239);cursor:pointer">forgot
+                            password?</a>
                         <hr>
                         <div class="pt-2" style="margin-left: auto; width: 100%;">
                             <a href="/auth/google" class=""
@@ -165,6 +179,11 @@
 <div id="email_null" class="confirm text-center bg-color text-white">
     <p id="msg_email">Please Enter your Email to reset password ! </p>
 </div>
+
+<div id="invalid" class="conformation text-center" style="padding: 20px;" >
+    <p>  User doesn't exist!   </p>
+    <button class="btn btn-danger" id="cancel">Ok</button>
+</div>
 <script>
 
     function onSignIn(googleUser) {
@@ -174,4 +193,7 @@
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     }
+    document.getElementById('cancel').addEventListener('click',()=>{
+        document.getElementById('invalid').style.display="none"
+    })
 </script>

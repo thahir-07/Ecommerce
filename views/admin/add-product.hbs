@@ -209,6 +209,7 @@
                 img.width = '100'
                 img.height = '100'
                 img.style.border = '1px solid green'
+                img.style.objectFit='contain'
                 img.src = URL.createObjectURL(file);
                 const container = document.getElementById('imgcontainer' + i);
                 container.appendChild(img);
