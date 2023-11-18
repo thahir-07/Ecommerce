@@ -1,25 +1,15 @@
-    if (window.innerWidth <= 990) {
-        document.getElementById('search-lap').style.display = 'none'
-        document.getElementById('smartphone-search-inp').style.display = 'block'
-    } else {
-        document.getElementById('smartphone-search-inp').style.display = 'none'
-        document.getElementById('search-lap').style.display = 'block'
-    }
-    window.addEventListener('load',()=>{
+
+   
         if (window.innerWidth <= 990) {
             document.getElementById('search-lap').style.display = 'none'
-            document.getElementById('smartphone-search-inp').style.display = 'block'
         } else {
-            document.getElementById('smartphone-search-inp').style.display = 'none'
             document.getElementById('search-lap').style.display = 'block'
         }  
-    })
+    
     window.addEventListener('resize', () => {
         if (window.innerWidth <= 990) {
             document.getElementById('search-lap').style.display = 'none'
-            document.getElementById('smartphone-search-inp').style.display = 'block'
         } else {
-            document.getElementById('smartphone-search-inp').style.display = 'none'
             document.getElementById('search-lap').style.display = 'block'
         }
     })
@@ -400,7 +390,7 @@ function forgot_password(){
                     }
                 })
             }else{
-                alert("user doesn't exist")
+                document.getElementById('invalid').style.display="block"
             }
         }
     })

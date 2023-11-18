@@ -196,7 +196,7 @@
     <h3>Electronics</h3>
     <div class="scrolling-wrapper" style="margin: 0;padding: 5px;">
       {{#each product}}
-      {{#product_check this 'Electronics'}}
+      {{#product_check_electronics this 'Electronics'}}
        <div class="col-4 col-md-2 product" style="padding: 0;">
         <div class="card-outer m" style="border: .5px solid rgba(149, 142, 142, 0.329); overflow: hidden; border-radius: 0;">
           <div class="card border border-shadow card-outer" style="border-radius: 0;">
@@ -214,7 +214,7 @@
           </div>
         </div>
       </div>
-      {{/product_check}}
+      {{/product_check_electronics}}
       {{/each}}
     </div>
   </div>
@@ -260,7 +260,7 @@
             <p>Your use of this website does not grant you any rights or licenses in relation to the intellectual property rights or the content presented herein. All content on this website is provided for informational purposes and does not constitute professional advice.</p>
             <p>Flashcart reserves the right to take legal action against any unauthorized use of its copyrighted content or intellectual property.</p>
             <p>For more information about our terms of use and privacy practices, please visit our <a href="/terms-of-use">Terms of Use</a> and <a href="/privacy-policy">Privacy Policy</a> pages linked at the bottom of this website.</p>
-            <p>For copyright inquiries, please contact:</p>
+            <p>For copyright inquiries, please contact:  <a href="/contact-us">contact us</a> </p>
             <address>
                 Legal Department<br>
                 Flashcart<br>
@@ -340,7 +340,22 @@ for (const element of amtElements) {
   const formattedTextContent = formatIndianAmountInINR(textContent);
   element.textContent = formattedTextContent;
 }
+
+if(window.innerWidth<=990){
+  document.getElementById('smartphone-search-inp').style.display = 'block'
+}else{
+  document.getElementById('smartphone-search-inp').style.display = 'none'
+}
+window.addEventListener('resize',()=>{
+  if(window.innerWidth<=990){
+  document.getElementById('smartphone-search-inp').style.display = 'block'
+}else{
+  document.getElementById('smartphone-search-inp').style.display = 'none'
+}
+})
 </script>
+
+
 
 <!--<script>
   function scroll_right(){
